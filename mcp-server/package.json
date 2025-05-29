@@ -1,11 +1,11 @@
 {
-  "name": "@the-way-of-code/mcp-server",
+  "name": "the-way-of-code",
   "version": "1.0.0",
   "description": "MCP server for The Way of Code - vibe coding principles based on Rick Rubin's adaptation of the Tao Te Ching",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
-    "way-of-code-mcp": "dist/index.js"
+    "the-way-of-code": "dist/index.js"
   },
   "scripts": {
     "build": "tsc",
@@ -17,6 +17,7 @@
   },
   "keywords": [
     "mcp",
+    "model-context-protocol",
     "tao",
     "coding",
     "philosophy",
@@ -24,10 +25,24 @@
     "rick-rubin",
     "principles",
     "ai",
-    "assistant"
+    "assistant",
+    "wisdom",
+    "development"
   ],
   "author": "The Way of Code",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mgd1984/the-way-of-code.git",
+    "directory": "mcp-server"
+  },
+  "homepage": "https://github.com/mgd1984/the-way-of-code#readme",
+  "bugs": {
+    "url": "https://github.com/mgd1984/the-way-of-code/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^0.5.0",
     "zod": "^3.25.0"
@@ -42,7 +57,8 @@
   },
   "files": [
     "dist/**/*",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ],
   "engines": {
     "node": ">=18.0.0"

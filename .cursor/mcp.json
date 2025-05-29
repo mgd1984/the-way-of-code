@@ -1,8 +1,8 @@
 {
     "mcpServers": {
       "the-way-of-code": {
-        "command": "node",
-        "args": ["mcp-server/dist/index.js"]
+        "command": "npx",
+        "args": ["the-way-of-code"]
       },
       "gitmcp-way-of-code": {
         "url": "https://gitmcp.io/mgd1984/the-way-of-code"

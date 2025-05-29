@@ -11,17 +11,6 @@
 
 The Way of Code is a foundational resource designed to infuse the principles of vibe-coding into every AI development session. Whether you're using Cursor, Windsurf, Claude, or any other AI coding assistant, these timeless principles should guide the creation of elegant, harmonious code.
 
-## 🎬 See The Way in Action
-
-*"The Vibe Coder leads by quiet example."* - Chapter 2
-
-<video width="100%" controls>
-  <source src="the-way-of-code-mcp.mp4" type="video/mp4">
-  Your browser does not support the video tag. <a href="the-way-of-code-mcp.mp4">Download the video</a> to see The Way of Code MCP integration in action.
-</video>
-
-*Watch how The Way of Code flows seamlessly into your development workflow through MCP integration.*
-
 ## 🚀 Quick Integration
 
 ### For GitMCP.io Users (Instant Setup)
@@ -31,11 +20,37 @@ https://gitmcp.io/mgd1984/the-way-of-code
 ```
 Simply add this URL as an MCP server in your AI assistant for instant access to The Way of Code principles.
 
+### For MCP Server (NPM Package)
+Install and use our dedicated MCP server:
+```bash
+# NPX (recommended)
+npx the-way-of-code
+
+# Global installation
+npm install -g the-way-of-code
+```
+
+Add to your AI assistant configuration:
+```json
+{
+  "mcpServers": {
+    "the-way-of-code": {
+      "command": "npx",
+      "args": ["the-way-of-code"]
+    }
+  }
+}
+```
+
 ### For Cursor Users
 Add this to your `.cursor/mcp.json`:
 ```json
 {
   "mcpServers": {
+    "the-way-of-code": {
+      "command": "npx",
+      "args": ["the-way-of-code"]
+    },
     "gitmcp-way-of-code": {
       "url": "https://gitmcp.io/mgd1984/the-way-of-code"
     }
@@ -48,9 +63,9 @@ Add to your configuration:
 ```json
 {
   "mcpServers": {
-    "gitmcp-way-of-code": {
+    "the-way-of-code": {
       "command": "npx",
-      "args": ["mcp-remote", "https://gitmcp.io/mgd1984/the-way-of-code"]
+      "args": ["the-way-of-code"]
     }
   }
 }
