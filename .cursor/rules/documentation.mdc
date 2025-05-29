@@ -1,0 +1,42 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Documentation - The Way of Code
+
+## Writing Philosophy
+- Write for the reader, not the writer
+- Explain the "why" before the "how"
+- Use simple, clear language
+- Let understanding emerge naturally
+
+## Structure
+- Start with the essential concept
+- Build complexity gradually
+- Use examples that illuminate principles
+- End with practical applications
+
+## Markdown Best Practices
+- Use consistent heading hierarchy
+- Include code examples that actually work
+- Link to related concepts when helpful
+- Keep paragraphs focused and scannable
+
+## The Way of Code Documentation
+- Balance philosophical depth with practical utility
+- Include both ancient wisdom and modern applications
+- Make principles immediately actionable
+- Connect abstract concepts to concrete coding practices
+
+## Examples and Scenarios
+- Use real-world coding situations
+- Show both the problem and the solution
+- Explain the principle behind the approach
+- Demonstrate the natural flow of good code
+
+## Maintenance
+- Keep documentation current with code changes
+- Remove outdated information promptly
+- Update examples to reflect best practices
+- Ensure consistency across all documentation

@@ -1,0 +1,58 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# MCP Tool Template - The Way of Code
+
+When creating a new MCP tool, follow this structure:
+
+## Tool Definition
+```typescript
+{
+  name: 'tool_name',
+  description: 'Clear, concise description of what this tool does',
+  inputSchema: {
+    type: 'object',
+    properties: {
+      // Define required parameters with clear descriptions
+    },
+    required: ['param1']
+  }
+}
+```
+
+## Implementation Pattern
+1. **Validate inputs** using Zod schema
+2. **Handle the core logic** simply and clearly
+3. **Return structured responses** with helpful formatting
+4. **Include error handling** with gentle, instructive messages
+
+## Response Structure
+- Use consistent formatting with markdown
+- Include relevant chapter numbers or keywords
+- Provide both philosophical and practical guidance
+- Make responses immediately actionable
+
+## Error Handling
+- Validate inputs gracefully
+- Provide helpful error messages
+- Suggest alternatives when possible
+- Maintain the gentle tone of The Way of Code
+
+## Example Implementation Pattern
+```typescript
+// 1. Define validation schema
+const ToolSchema = z.object({
+  param: z.string().min(1, "Helpful error message")
+});
+
+// 2. Handle with grace
+try {
+  const { param } = ToolSchema.parse(args);
+  const result = processSimply(param);
+  return formatResponse(result);
+} catch (error) {
+  return gentleErrorResponse(error);
+}
+```

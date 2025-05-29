@@ -1,0 +1,30 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# TypeScript Development - The Way of Code
+
+## Type Design
+- Prefer simple, clear type definitions over complex ones
+- Use union types and discriminated unions for clarity
+- Let TypeScript infer types when it's obvious
+- Create types that express intent, not just structure
+
+## Error Handling
+- Use Result types or proper error boundaries
+- Validate at system boundaries with runtime checks
+- Prefer explicit error handling over throwing exceptions
+- Make error states visible in the type system
+
+## Code Organization
+- Keep modules focused and cohesive
+- Export only what needs to be public
+- Use barrel exports sparingly
+- Organize by feature, not by file type
+
+## Best Practices
+- Use strict TypeScript configuration
+- Prefer `const` assertions for immutable data
+- Use Zod or similar for runtime validation
+- Write code that reads naturally, even with types
