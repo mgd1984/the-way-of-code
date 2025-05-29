@@ -11,60 +11,26 @@ import {
 import { z } from 'zod';
 import { wayOfCodeData } from './data/way-of-code.js';
 
-// Tool schemas - Updated to match MCP SDK format
+// Zod schemas for validation (keep these for runtime validation)
 const GetChapterSchema = z.object({
-  type: z.literal('object'),
-  properties: z.object({
-    chapter: z.object({
-      type: z.literal('number'),
-      description: z.literal('Chapter number (1-81)'),
-      minimum: z.literal(1),
-      maximum: z.literal(81)
-    })
-  }),
-  required: z.array(z.literal('chapter'))
+  chapter: z.number().min(1).max(81),
 });
 
 const SearchPrinciplesSchema = z.object({
-  type: z.literal('object'),
-  properties: z.object({
-    query: z.object({
-      type: z.literal('string'),
-      description: z.literal('Search query for finding relevant principles')
-    }),
-    context: z.object({
-      type: z.literal('string'),
-      description: z.literal('Optional context about the coding situation')
-    }).optional()
-  }),
-  required: z.array(z.literal('query'))
+  query: z.string(),
+  context: z.string().optional(),
 });
 
 const GetDailyWisdomSchema = z.object({
-  type: z.literal('object'),
-  properties: z.object({
-    date: z.object({
-      type: z.literal('string'),
-      description: z.literal('Date in YYYY-MM-DD format (optional, defaults to today)')
-    }).optional()
-  })
+  date: z.string().optional(),
 });
 
 const GetPrinciplesByTopicSchema = z.object({
-  type: z.literal('object'),
-  properties: z.object({
-    topic: z.object({
-      type: z.literal('string'),
-      enum: z.array(z.enum(['simplicity', 'complexity', 'flow', 'force', 'humility', 'ego', 'balance', 'extremes', 'presence', 'rushing', 'debugging', 'refactoring', 'architecture', 'collaboration', 'leadership'])),
-      description: z.literal('Topic to find principles for')
-    })
-  }),
-  required: z.array(z.literal('topic'))
-});
-
-const GetCorePrinciplesSchema = z.object({
-  type: z.literal('object'),
-  properties: z.object({})
+  topic: z.enum([
+    'simplicity', 'complexity', 'flow', 'force', 'humility', 'ego', 
+    'balance', 'extremes', 'presence', 'rushing', 'debugging', 
+    'refactoring', 'architecture', 'collaboration', 'leadership'
+  ]),
 });
 
 // Create server
@@ -87,27 +53,72 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
       {
         name: 'get_chapter',
         description: 'Get a specific chapter from The Way of Code',
-        inputSchema: GetChapterSchema,
+        inputSchema: {
+          type: 'object',
+          properties: {
+            chapter: {
+              type: 'number',
+              description: 'Chapter number (1-81)',
+              minimum: 1,
+              maximum: 81
+            }
+          },
+          required: ['chapter']
+        },
       },
       {
         name: 'search_principles',
         description: 'Search for principles relevant to a coding situation',
-        inputSchema: SearchPrinciplesSchema,
+        inputSchema: {
+          type: 'object',
+          properties: {
+            query: {
+              type: 'string',
+              description: 'Search query for finding relevant principles'
+            },
+            context: {
+              type: 'string',
+              description: 'Optional context about the coding situation'
+            }
+          },
+          required: ['query']
+        },
       },
       {
         name: 'get_daily_wisdom',
         description: 'Get daily wisdom based on the current date',
-        inputSchema: GetDailyWisdomSchema,
+        inputSchema: {
+          type: 'object',
+          properties: {
+            date: {
+              type: 'string',
+              description: 'Date in YYYY-MM-DD format (optional, defaults to today)'
+            }
+          }
+        },
       },
       {
         name: 'get_principles_by_topic',
         description: 'Get principles related to a specific coding topic',
-        inputSchema: GetPrinciplesByTopicSchema,
+        inputSchema: {
+          type: 'object',
+          properties: {
+            topic: {
+              type: 'string',
+              enum: ['simplicity', 'complexity', 'flow', 'force', 'humility', 'ego', 'balance', 'extremes', 'presence', 'rushing', 'debugging', 'refactoring', 'architecture', 'collaboration', 'leadership'],
+              description: 'Topic to find principles for'
+            }
+          },
+          required: ['topic']
+        },
       },
       {
         name: 'get_core_principles',
         description: 'Get the five core principles of The Way of Code',
-        inputSchema: GetCorePrinciplesSchema,
+        inputSchema: {
+          type: 'object',
+          properties: {}
+        },
       },
     ],
   };
@@ -120,7 +131,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
   try {
     switch (name) {
       case 'get_chapter': {
-        const { chapter } = args as { chapter: number };
+        const { chapter } = GetChapterSchema.parse(args);
         const chapterData = wayOfCodeData.chapters.find(c => c.number === chapter);
         
         if (!chapterData) {
@@ -138,7 +149,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
       }
 
       case 'search_principles': {
-        const { query, context } = args as { query: string; context?: string };
+        const { query, context } = SearchPrinciplesSchema.parse(args);
         const searchTerms = query.toLowerCase().split(' ');
         
         const relevantChapters = wayOfCodeData.chapters.filter(chapter => {
@@ -174,7 +185,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
       }
 
       case 'get_daily_wisdom': {
-        const { date } = args as { date?: string };
+        const { date } = GetDailyWisdomSchema.parse(args);
         const targetDate = date ? new Date(date) : new Date();
         
         // Use day of year to select chapter (1-365 maps to 1-81 with cycling)
@@ -198,7 +209,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
       }
 
       case 'get_principles_by_topic': {
-        const { topic } = args as { topic: string };
+        const { topic } = GetPrinciplesByTopicSchema.parse(args);
         
         const topicKeywords: Record<string, string[]> = {
           simplicity: ['simplicity', 'simple', 'complexity', 'elegant'],
