@@ -1,0 +1,147 @@
+# The Way of Code - AI Context Guide
+
+## Project Overview
+
+The Way of Code is a philosophical approach to software development inspired by the Tao Te Ching, adapted for modern coding practices. This project provides practical wisdom for developers through 81 principles that guide elegant, sustainable, and harmonious coding.
+
+## Core Philosophy
+
+### The Five Pillars
+1. **Simplicity Over Complexity** - Choose the simplest solution that works
+2. **Flow Over Force** - Let solutions emerge naturally, don't force them
+3. **Humility Over Ego** - Code without attachment to being "right"
+4. **Balance Over Extremes** - Find the middle way in all development decisions
+5. **Presence Over Rushing** - Code with full attention to the current task
+
+## Project Structure
+
+### MCP Server (`mcp-server/`)
+- **Purpose**: Model Context Protocol server providing access to The Way of Code principles
+- **Technology**: TypeScript/Node.js with Zod validation
+- **Tools Provided**:
+  - `get_chapter`: Retrieve specific chapters (1-81)
+  - `search_principles`: Search for relevant principles by query
+  - `get_daily_wisdom`: Get daily wisdom based on date
+  - `get_principles_by_topic`: Get principles by topic (simplicity, flow, etc.)
+  - `get_core_principles`: Get the five core principles
+
+### Cursor Integration (`.cursor/`)
+- **Rules**: Modern MDC format rules for contextual coding guidance
+- **MCP Config**: Integration with both local server and GitMCP.io
+- **Auto-attachment**: Rules activate based on file patterns
+
+### Documentation (`text/`, `examples/`, `principles/`)
+- **Text**: Core philosophical content and principles
+- **Examples**: Real-world coding scenarios and applications
+- **Principles**: Organized wisdom by topic and theme
+
+## Key Features
+
+### Vibe Coding Approach
+- Emphasizes harmony between developer and code
+- Focuses on sustainable development practices
+- Balances technical excellence with philosophical depth
+- Promotes mindful, present-moment coding
+
+### MCP Integration
+- Seamless integration with AI coding assistants
+- Contextual wisdom delivery during development
+- Real-time access to principles and guidance
+- Support for multiple MCP clients (Cursor, Claude, etc.)
+
+### Practical Applications
+- Code review guidelines following The Way
+- Architecture decisions based on natural patterns
+- Problem-solving through wu-wei (non-action)
+- Team collaboration principles
+
+## Usage Examples
+
+### Getting Daily Wisdom
+```typescript
+// Get today's wisdom
+const wisdom = await mcp.call('get_daily_wisdom');
+
+// Get wisdom for specific date
+const wisdom = await mcp.call('get_daily_wisdom', { date: '2025-01-01' });
+```
+
+### Searching for Guidance
+```typescript
+// Search for principles about a specific topic
+const principles = await mcp.call('search_principles', {
+  query: 'debugging complex problems',
+  context: 'Working on a difficult bug in production'
+});
+```
+
+### Topic-Based Guidance
+```typescript
+// Get principles for specific development areas
+const flowPrinciples = await mcp.call('get_principles_by_topic', { topic: 'flow' });
+const simplicityPrinciples = await mcp.call('get_principles_by_topic', { topic: 'simplicity' });
+```
+
+## Development Principles
+
+### Code Organization
+- Follow natural patterns, not forced structures
+- Let complexity emerge from necessity, not cleverness
+- Maintain clean interfaces and clear separation
+- Build systems that adapt to changing requirements
+
+### Error Handling
+- Handle errors gracefully, not forcefully
+- Provide helpful context in error messages
+- Fail fast when appropriate, recover gracefully when possible
+- Learn from mistakes without attachment
+
+### Collaboration
+- Lead through questions and listening
+- Resolve conflicts through understanding
+- Share knowledge freely without seeking credit
+- Help others grow through service
+
+## Installation & Setup
+
+### MCP Server
+```bash
+cd mcp-server
+npm install
+npm run build
+npm start
+```
+
+### Cursor Integration
+Add to `.cursor/mcp.json`:
+```json
+{
+  "mcpServers": {
+    "the-way-of-code": {
+      "command": "node",
+      "args": ["mcp-server/dist/index.js"]
+    }
+  }
+}
+```
+
+### GitMCP.io Integration
+Use URL: `https://gitmcp.io/mgd1984/the-way-of-code`
+
+## Contributing
+
+Follow The Way of Code principles:
+- Approach with beginner's mind
+- Suggest improvements through questions, not commands
+- Focus on the code's service to users
+- Embrace "I don't know" as the starting point for learning
+
+## License
+
+Open source - wisdom flows freely like water, nourishing all who encounter it.
+
+---
+
+*"The code that can be named is not the eternal code. The way that can be spoken is not the eternal way."*
+
+This project embodies the timeless principles of the Tao applied to modern software development, creating a bridge between ancient wisdom and contemporary coding practices. 

@@ -3,6 +3,8 @@
 
 *Based on the Tao Te Ching by Lao Tzu, adapted by Rick Rubin for the age of AI-driven development*
 
+[![GitMCP](https://img.shields.io/endpoint?url=https://gitmcp.io/badge/mgd1984/the-way-of-code)](https://gitmcp.io/mgd1984/the-way-of-code)
+
 > "The code that can be named is not the eternal code. The function that can be defined is not the limitless function."
 
 ## 🌊 Vision
@@ -11,18 +13,36 @@ The Way of Code is a foundational resource designed to infuse the principles of 
 
 ## 🚀 Quick Integration
 
-### For Cursor Users
-Add this to your `.cursorrules` file:
+### For GitMCP.io Users (Instant Setup)
+Transform any GitHub repository into an AI-accessible documentation hub:
 ```
-# The Way of Code Integration
-Before writing any code, consider the principles from The Way of Code:
-- Embrace simplicity over complexity
-- Write code that flows naturally
-- Avoid forcing solutions - let them emerge
-- Balance structure with flexibility
-- Code with humility and openness
+https://gitmcp.io/mgd1984/the-way-of-code
+```
+Simply add this URL as an MCP server in your AI assistant for instant access to The Way of Code principles.
 
-Reference: https://raw.githubusercontent.com/[username]/the-way-of-code/main/principles/core-principles.md
+### For Cursor Users
+Add this to your `.cursor/mcp.json`:
+```json
+{
+  "mcpServers": {
+    "gitmcp-way-of-code": {
+      "url": "https://gitmcp.io/mgd1984/the-way-of-code"
+    }
+  }
+}
+```
+
+### For Claude Desktop
+Add to your configuration:
+```json
+{
+  "mcpServers": {
+    "gitmcp-way-of-code": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/mgd1984/the-way-of-code"]
+    }
+  }
+}
 ```
 
 ### For MCP-Compatible Tools
