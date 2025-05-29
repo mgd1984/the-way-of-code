@@ -1,0 +1,95 @@
+#!/bin/bash
+
+# The Way of Code - Pre-commit Hook
+# Reminds developers of vibe-coding principles before committing
+
+# Colors for output
+BLUE='\033[0;34m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+# Get a random principle for reflection
+get_random_principle() {
+    principles=(
+        "Simplicity Over Complexity: Choose the simplest solution that works"
+        "Flow Over Force: Don't force solutions; let them emerge"
+        "Humility Over Ego: Code without attachment to being 'right'"
+        "Balance Over Extremes: Neither too rigid nor too loose"
+        "Presence Over Rushing: Code with full attention to the current task"
+    )
+    
+    # Use commit hash for deterministic randomness
+    if git rev-parse --verify HEAD >/dev/null 2>&1; then
+        hash=$(git rev-parse HEAD | tr -d '\n' | wc -c)
+    else
+        hash=$(date +%s)
+    fi
+    
+    index=$((hash % ${#principles[@]}))
+    echo "${principles[$index]}"
+}
+
+# Get daily chapter number
+get_daily_chapter() {
+    day_of_year=$(date +%j)
+    chapter=$(((day_of_year - 1) % 81 + 1))
+    echo $chapter
+}
+
+echo -e "${BLUE}🌊 The Way of Code${NC}"
+echo -e "${BLUE}═══════════════════${NC}"
+echo ""
+
+# Show today's principle
+principle=$(get_random_principle)
+echo -e "${GREEN}Today's Principle:${NC}"
+echo -e "${YELLOW}$principle${NC}"
+echo ""
+
+# Show daily chapter
+chapter=$(get_daily_chapter)
+echo -e "${GREEN}Daily Chapter: ${chapter}${NC}"
+echo -e "${YELLOW}Consider: How does today's code reflect The Way?${NC}"
+echo ""
+
+# Check for common anti-patterns
+echo -e "${GREEN}Pre-commit Reflection:${NC}"
+
+# Check for overly complex files
+large_files=$(git diff --cached --name-only | xargs wc -l 2>/dev/null | awk '$1 > 500 {print $2}' | grep -v total)
+if [ ! -z "$large_files" ]; then
+    echo -e "${YELLOW}⚠️  Large files detected. Consider: Can these be simplified?${NC}"
+    echo "$large_files"
+    echo ""
+fi
+
+# Check for TODO/FIXME comments
+todos=$(git diff --cached | grep -E "^\+.*TODO|^\+.*FIXME" | wc -l)
+if [ $todos -gt 0 ]; then
+    echo -e "${YELLOW}⚠️  $todos new TODO/FIXME comments. Consider: Is this technical debt or natural evolution?${NC}"
+    echo ""
+fi
+
+# Check commit message for mindfulness
+commit_msg_file=".git/COMMIT_EDITMSG"
+if [ -f "$commit_msg_file" ]; then
+    msg_length=$(wc -c < "$commit_msg_file")
+    if [ $msg_length -lt 10 ]; then
+        echo -e "${YELLOW}⚠️  Short commit message. Consider: Does this capture the essence of the change?${NC}"
+        echo ""
+    fi
+fi
+
+echo -e "${GREEN}Questions for Reflection:${NC}"
+echo -e "${YELLOW}• Does this code flow naturally?${NC}"
+echo -e "${YELLOW}• Have I chosen simplicity over cleverness?${NC}"
+echo -e "${YELLOW}• Will this serve future developers (including myself)?${NC}"
+echo -e "${YELLOW}• Am I committing from a place of completion, not urgency?${NC}"
+echo ""
+
+echo -e "${BLUE}Proceeding with commit... 🚀${NC}"
+echo ""
+
+# Continue with the commit
+exit 0 

@@ -1,0 +1,116 @@
+{
+  "name": "the-way-of-code",
+  "displayName": "The Way of Code",
+  "description": "Vibe coding principles based on Rick Rubin's adaptation of the Tao Te Ching",
+  "version": "1.0.0",
+  "publisher": "the-way-of-code",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other",
+    "Education"
+  ],
+  "keywords": [
+    "tao",
+    "philosophy",
+    "coding",
+    "vibe",
+    "rick-rubin",
+    "principles",
+    "ai"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "wayOfCode.getDailyWisdom",
+        "title": "Get Daily Wisdom",
+        "category": "Way of Code"
+      },
+      {
+        "command": "wayOfCode.searchPrinciples",
+        "title": "Search Principles",
+        "category": "Way of Code"
+      },
+      {
+        "command": "wayOfCode.getChapter",
+        "title": "Get Specific Chapter",
+        "category": "Way of Code"
+      },
+      {
+        "command": "wayOfCode.showCorePrinciples",
+        "title": "Show Core Principles",
+        "category": "Way of Code"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "wayOfCode.getDailyWisdom",
+        "key": "ctrl+shift+w",
+        "mac": "cmd+shift+w"
+      }
+    ],
+    "configuration": {
+      "title": "The Way of Code",
+      "properties": {
+        "wayOfCode.showDailyWisdomOnStartup": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show daily wisdom when VS Code starts"
+        },
+        "wayOfCode.enableStatusBarWisdom": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show wisdom in status bar"
+        },
+        "wayOfCode.reminderInterval": {
+          "type": "number",
+          "default": 60,
+          "description": "Minutes between principle reminders (0 to disable)"
+        }
+      }
+    },
+    "views": {
+      "explorer": [
+        {
+          "id": "wayOfCodePrinciples",
+          "name": "Way of Code",
+          "when": "wayOfCode.enabled"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "wayOfCode",
+          "title": "Way of Code",
+          "icon": "$(symbol-misc)"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@types/node": "16.x",
+    "typescript": "^4.9.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/[username]/the-way-of-code.git",
+    "directory": "vscode-extension"
+  },
+  "homepage": "https://github.com/[username]/the-way-of-code#readme",
+  "bugs": {
+    "url": "https://github.com/[username]/the-way-of-code/issues"
+  },
+  "license": "MIT"
+} 
