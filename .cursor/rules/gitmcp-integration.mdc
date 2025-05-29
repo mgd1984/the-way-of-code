@@ -3,3 +3,117 @@ description:
 globs:
 alwaysApply: false
 ---
+# GitMCP.io Integration - The Way of Seamless Flow
+
+*"The highest good is like water. Water nourishes the ten thousand things without effort."* - Chapter 8
+
+## Philosophy
+
+GitMCP.io integration should embody the principle of **Flow Over Force**:
+- Zero friction setup
+- Natural documentation access
+- Seamless AI assistant integration
+- Universal accessibility without barriers
+
+## Integration Patterns
+
+### URL Transformation
+```
+github.com/mgd1984/the-way-of-code → gitmcp.io/mgd1984/the-way-of-code
+```
+
+### MCP Configuration
+Always provide multiple integration options:
+- Specific repository servers for focused access
+- Generic servers for flexible exploration
+- Clear, copy-paste ready configurations
+
+### Documentation Structure
+Optimize for GitMCP.io consumption:
+- Comprehensive `llms.txt` file
+- Clear project structure explanation
+- Usage examples with context
+- Integration instructions for all major AI assistants
+
+## Implementation Guidelines
+
+### 1. **Simplicity Over Complexity**
+- Provide one-line setup instructions
+- Avoid complex configuration requirements
+- Use standard MCP patterns
+
+### 2. **Universal Access**
+- Support all major AI assistants
+- Provide fallback options
+- Include troubleshooting guidance
+
+### 3. **Living Documentation**
+- Keep `llms.txt` current with project evolution
+- Update integration examples regularly
+- Maintain compatibility across tools
+
+### 4. **Community Focus**
+- Make integration accessible to all skill levels
+- Provide clear value propositions
+- Enable easy sharing and adoption
+
+## Code Examples
+
+### MCP Configuration Template
+```json
+{
+  "mcpServers": {
+    "gitmcp-way-of-code": {
+      "url": "https://gitmcp.io/mgd1984/the-way-of-code"
+    },
+    "gitmcp-docs": {
+      "url": "https://gitmcp.io/docs"
+    }
+  }
+}
+```
+
+### Badge Integration
+```markdown
+[![GitMCP](https://img.shields.io/endpoint?url=https://gitmcp.io/badge/mgd1984/the-way-of-code)](https://gitmcp.io/mgd1984/the-way-of-code)
+```
+
+## Quality Principles
+
+### Documentation Quality
+- Clear, concise explanations
+- Real-world usage examples
+- Step-by-step setup guides
+- Troubleshooting sections
+
+### Integration Quality
+- Test across multiple AI assistants
+- Verify configuration examples
+- Maintain backward compatibility
+- Monitor community feedback
+
+### Philosophical Alignment
+- Embody The Way of Code principles
+- Promote vibe-coding practices
+- Enable natural workflow integration
+- Support mindful development
+
+## Maintenance Approach
+
+### Regular Updates
+- Sync with GitMCP.io feature releases
+- Update AI assistant compatibility
+- Refresh documentation examples
+- Monitor integration health
+
+### Community Engagement
+- Respond to integration questions
+- Collect usage feedback
+- Share best practices
+- Support adoption efforts
+
+---
+
+*"Do by not doing, and there is nothing that cannot be done."* - Chapter 3
+
+Let GitMCP.io integration flow naturally into The Way of Code ecosystem, serving all who seek coding wisdom without force or friction.

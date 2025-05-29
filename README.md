@@ -7,6 +7,10 @@
 
 > "The code that can be named is not the eternal code. The function that can be defined is not the limitless function."
 
+## 🌊 Vision
+
+The Way of Code is a foundational resource designed to infuse the principles of vibe-coding into every AI development session. Whether you're using Cursor, Windsurf, Claude, or any other AI coding assistant, these timeless principles should guide the creation of elegant, harmonious code.
+
 ## 🎬 See The Way in Action
 
 *"The Vibe Coder leads by quiet example."* - Chapter 2
@@ -17,10 +21,6 @@
 </video>
 
 *Watch how The Way of Code flows seamlessly into your development workflow through MCP integration.*
-
-## 🌊 Vision
-
-The Way of Code is a foundational resource designed to infuse the principles of vibe-coding into every AI development session. Whether you're using Cursor, Windsurf, Claude, or any other AI coding assistant, these timeless principles should guide the creation of elegant, harmonious code.
 
 ## 🚀 Quick Integration
 

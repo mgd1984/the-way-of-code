@@ -1,6 +1,12 @@
 # The Way of Code - .gitignore
 # "The wise developer knows what to keep and what to let go"
 
+# Large media files - let them flow elsewhere for now
+*.mp4
+*.mov
+*.avi
+*.mkv
+
 # Dependencies
 node_modules/
 npm-debug.log*

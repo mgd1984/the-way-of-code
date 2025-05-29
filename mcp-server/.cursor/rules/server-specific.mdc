@@ -1,5 +1,25 @@
----
-description:
-globs:
-alwaysApply: false
----
+# MCP Server - The Way of Code Integration
+
+## Philosophy Integration
+- Each tool should embody The Way of Code principles
+- Responses should include both practical and philosophical guidance
+- Error messages should be gentle and instructive
+- Tool descriptions should be clear and purposeful
+
+## Implementation Guidelines
+- Keep tool handlers simple and focused
+- Use semantic search to find relevant principles
+- Provide multiple ways to access wisdom (by chapter, topic, search)
+- Include coding applications with each philosophical principle
+
+## Response Format
+- Structure responses for readability
+- Include chapter numbers and keywords
+- Provide actionable coding advice
+- Balance philosophical depth with practical utility
+
+## Data Structure
+- Maintain immutable chapter data
+- Use consistent keyword tagging
+- Ensure coding applications are practical and specific
+- Keep search functionality intuitive and helpful
