@@ -83,6 +83,92 @@ Simply reference this repository in your prompts:
 Please code following The Way of Code principles from: https://github.com/[username]/the-way-of-code
 ```
 
+## 🚀 MCP Server
+
+The Way of Code is available as a **complete Model Context Protocol (MCP) server** with full capabilities:
+
+### 📦 Quick Start
+```bash
+# Install and run
+npx the-way-of-code
+
+# Or install globally
+npm install -g the-way-of-code
+```
+
+### 🎯 Complete MCP Implementation
+
+Our server implements all three MCP primitives for maximum flexibility:
+
+#### 🛠️ **Tools** (Model-Controlled)
+- `get_chapter` - Retrieve specific chapters (1-81)
+- `search_principles` - Find relevant wisdom for coding situations
+- `get_daily_wisdom` - Get today's wisdom based on current date
+- `get_principles_by_topic` - Access principles by topic (simplicity, flow, etc.)
+- `get_core_principles` - The five fundamental principles
+- `find_wisdom_by_keyword` - Search chapters by keywords
+- `get_philosophical_context` - Deep philosophical background
+
+#### 📚 **Resources** (Application-Controlled)
+- `way://chapters/all` - Complete chapter collection (JSON)
+- `way://principles/core` - Core principles (JSON)
+- `way://wisdom/daily` - Daily wisdom (Markdown)
+- `way://philosophy/overview` - Complete philosophical framework (Markdown)
+- `way://keywords/index` - Searchable keyword index (JSON)
+
+#### 💡 **Prompts** (User-Controlled)
+- `code-review-wisdom` - Philosophical code review guidance
+- `debug-with-presence` - Mindful debugging approach
+- `architecture-balance` - Balanced system design
+- `refactor-with-flow` - Natural code refactoring
+- `team-collaboration` - Harmonious team dynamics
+- `daily-reflection` - End-of-day practice reflection
+
+### 🔧 Configuration Examples
+
+#### Claude Desktop
+```json
+{
+  "mcpServers": {
+    "the-way-of-code": {
+      "command": "npx",
+      "args": ["the-way-of-code"]
+    }
+  }
+}
+```
+<img src="./@mcp-tools.png" alt="MCP Tools Overview" width="600"/>
+
+
+
+
+#### Cursor IDE
+```json
+{
+  "mcpServers": {
+    "the-way-of-code": {
+      "command": "npx",
+      "args": ["the-way-of-code"]
+    }
+  }
+}
+```
+
+#### GitMCP.io Integration
+For instant access without local installation:
+```
+https://gitmcp.io/mgd1984/the-way-of-code
+```
+
+### 🌊 Usage Philosophy
+
+The server embodies The Way of Code principles:
+- **Resources** provide context like still water reflecting wisdom
+- **Tools** act when called upon, like water flowing around obstacles  
+- **Prompts** guide users naturally toward mindful solutions
+
+Each capability serves a different aspect of the development journey, from quick lookups to deep philosophical guidance.
+
 ## 📖 The Chapters
 
 The complete 81 chapters of The Way of Code are organized for easy reference and integration:
