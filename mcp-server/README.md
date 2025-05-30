@@ -1,36 +1,66 @@
 # The Way of Code - MCP Server
 
-*"The code that can be named is not the eternal code. The way that can be spoken is not the eternal way."*
+A Model Context Protocol (MCP) server that provides access to The Way of Code - ancient wisdom adapted for modern software development. This server offers **complete MCP capabilities**: Tools, Resources, and Prompts.
 
-A Model Context Protocol (MCP) server that provides AI assistants with access to The Way of Code - 81 principles of vibe coding based on Rick Rubin's adaptation of the Tao Te Ching for software development.
+## 🌊 Philosophy
 
-## 🌊 Overview
-
-This MCP server enables AI coding assistants to access philosophical guidance and practical wisdom for software development. Whether you're debugging complex problems, making architectural decisions, or seeking daily coding inspiration, The Way of Code provides timeless principles adapted for modern development.
+The Way of Code draws from Taoist principles, particularly the Tao Te Ching, adapting timeless wisdom for software craftsmanship. Like water that flows naturally around obstacles, code should follow the path of least resistance while maintaining its essential purpose.
 
 ## 🚀 Installation
 
-### NPX (Recommended)
+### NPM (Recommended)
 ```bash
 npx the-way-of-code
 ```
 
-### Global Installation
+### Local Development
 ```bash
-npm install -g the-way-of-code
-the-way-of-code
+git clone https://github.com/mgd1984/the-way-of-code.git
+cd the-way-of-code/mcp-server
+npm install
+npm run build
+node dist/index.js
 ```
 
-### Local Installation
-```bash
-npm install the-way-of-code
-npx the-way-of-code
-```
+## 📋 MCP Capabilities
 
-## 🛠 Configuration
+This server implements all three MCP primitives for maximum flexibility:
 
-### Cursor
-Add to `.cursor/mcp.json`:
+### 🛠️ Tools (Model-Controlled)
+Functions that AI models can call to retrieve specific wisdom:
+
+- **`get_chapter`** - Get a specific chapter (1-81) from The Way of Code
+- **`search_principles`** - Search for principles relevant to a coding situation  
+- **`get_daily_wisdom`** - Get daily wisdom based on current date
+- **`get_principles_by_topic`** - Get principles for specific topics (simplicity, flow, humility, etc.)
+- **`get_core_principles`** - Get the five fundamental principles
+- **`find_wisdom_by_keyword`** - Find chapters containing specific keywords
+- **`get_philosophical_context`** - Get philosophical background and context
+
+### 📚 Resources (Application-Controlled)
+Contextual data that can be read and referenced:
+
+- **`way://chapters/all`** - Complete collection of all 81 chapters (JSON)
+- **`way://principles/core`** - The five fundamental principles (JSON)
+- **`way://wisdom/daily`** - Today's wisdom chapter (Markdown)
+- **`way://philosophy/overview`** - Complete philosophical framework (Markdown)
+- **`way://keywords/index`** - Searchable keyword index (JSON)
+
+### 💡 Prompts (User-Controlled)
+Templated workflows for specific coding scenarios:
+
+- **`code-review-wisdom`** - Apply Way of Code principles to code review
+- **`debug-with-presence`** - Approach debugging with mindfulness
+- **`architecture-balance`** - Design balanced system architecture
+- **`refactor-with-flow`** - Refactor code following natural flow
+- **`team-collaboration`** - Foster team collaboration using principles
+- **`daily-reflection`** - End-of-day coding practice reflection
+
+## 🔧 Configuration
+
+### Claude Desktop
+Add to your `claude_desktop_config.json`:
+
 ```json
 {
   "mcpServers": {
@@ -42,8 +72,9 @@ Add to `.cursor/mcp.json`:
 }
 ```
 
-### Claude Desktop
-Add to `claude_desktop_config.json`:
+### Cursor
+Add to your `.cursor/mcp.json`:
+
 ```json
 {
   "mcpServers": {
@@ -56,151 +87,110 @@ Add to `claude_desktop_config.json`:
 ```
 
 ### Other MCP Clients
-Use the command: `npx the-way-of-code`
+Use the standard MCP client configuration with:
+- **Command**: `npx`
+- **Args**: `["the-way-of-code"]`
+- **Transport**: stdio
 
-## 🎯 Available Tools
+## 📖 Usage Examples
 
-### `get_chapter`
-Retrieve a specific chapter from The Way of Code (1-81).
+### Using Tools
+```javascript
+// Get today's wisdom
+await client.callTool("get_daily_wisdom", {});
 
-**Parameters:**
-- `chapter` (number): Chapter number between 1 and 81
+// Search for principles about debugging
+await client.callTool("search_principles", {
+  query: "debugging problems",
+  context: "Having trouble with a complex bug"
+});
 
-**Example:**
-```typescript
-// Get Chapter 8 about water and flow
-await mcp.call('get_chapter', { chapter: 8 });
-```
-
-### `search_principles`
-Search for principles relevant to your coding situation.
-
-**Parameters:**
-- `query` (string): Search terms for finding relevant principles
-- `context` (string, optional): Additional context about your situation
-
-**Example:**
-```typescript
-// Search for debugging guidance
-await mcp.call('search_principles', {
-  query: 'debugging complex problems',
-  context: 'Working on a production bug that\'s hard to reproduce'
+// Find chapters about water/flow
+await client.callTool("find_wisdom_by_keyword", {
+  keyword: "water",
+  limit: 3
 });
 ```
 
-### `get_daily_wisdom`
-Get daily wisdom based on the current date or a specific date.
+### Using Resources
+```javascript
+// Read all chapters for context
+const chapters = await client.readResource("way://chapters/all");
 
-**Parameters:**
-- `date` (string, optional): Date in YYYY-MM-DD format (defaults to today)
+// Get daily wisdom as markdown
+const dailyWisdom = await client.readResource("way://wisdom/daily");
 
-**Example:**
-```typescript
-// Get today's wisdom
-await mcp.call('get_daily_wisdom');
-
-// Get wisdom for a specific date
-await mcp.call('get_daily_wisdom', { date: '2025-01-01' });
+// Access the keyword index
+const keywords = await client.readResource("way://keywords/index");
 ```
 
-### `get_principles_by_topic`
-Get principles related to specific coding topics.
+### Using Prompts
+```javascript
+// Get a code review prompt
+const prompt = await client.getPrompt("code-review-wisdom", {
+  code: "function calculate(x, y) { return x * y + 10; }",
+  focus: "simplicity"
+});
 
-**Parameters:**
-- `topic` (string): One of: simplicity, complexity, flow, force, humility, ego, balance, extremes, presence, rushing, debugging, refactoring, architecture, collaboration, leadership
-
-**Example:**
-```typescript
-// Get principles about simplicity
-await mcp.call('get_principles_by_topic', { topic: 'simplicity' });
+// Get debugging guidance
+const debugPrompt = await client.getPrompt("debug-with-presence", {
+  problem_description: "Function returns undefined randomly",
+  context: "Node.js application with async operations"
+});
 ```
 
-### `get_core_principles`
-Get the five core principles of The Way of Code.
-
-**Example:**
-```typescript
-// Get the foundational principles
-await mcp.call('get_core_principles');
-```
-
-## 🌟 The Five Pillars
+## 🌟 The Five Core Principles
 
 1. **Simplicity Over Complexity** - Choose the simplest solution that works
 2. **Flow Over Force** - Let solutions emerge naturally, don't force them
 3. **Humility Over Ego** - Code without attachment to being "right"
-4. **Balance Over Extremes** - Find the middle way in all development decisions
-5. **Presence Over Rushing** - Code with full attention to the current task
+4. **Balance Over Extremes** - Find the middle way in all technical decisions
+5. **Presence Over Rushing** - Code with full attention and mindfulness
 
-## 🎨 Usage Examples
+## 🎯 Use Cases
 
-### Daily Coding Wisdom
-```
-Prompt: "Give me today's coding wisdom from The Way of Code"
-```
+- **Code Reviews** - Apply philosophical principles to evaluate code quality
+- **Architecture Design** - Balance competing concerns using ancient wisdom
+- **Debugging** - Approach problems with presence and systematic thinking
+- **Team Collaboration** - Foster harmony and effective communication
+- **Daily Practice** - Integrate mindful development into your routine
+- **Learning** - Understand deeper principles behind good software craftsmanship
 
-### Problem-Solving Guidance
-```
-Prompt: "I'm struggling with a complex architecture decision. What does The Way of Code suggest?"
-```
+## 🔗 Integration Examples
 
-### Code Review Philosophy
+### With GitMCP.io
+Access The Way of Code through GitMCP.io for instant integration:
 ```
-Prompt: "Review this code following The Way of Code principles"
-```
-
-### Debugging Approach
-```
-Prompt: "I have a difficult bug. How should I approach debugging according to The Way of Code?"
+https://gitmcp.io/mgd1984/the-way-of-code
 ```
 
-## 🔧 Development
-
-### Local Development
-```bash
-git clone https://github.com/mgd1984/the-way-of-code.git
-cd the-way-of-code/mcp-server
-npm install
-npm run dev
-```
-
-### Building
-```bash
-npm run build
-```
-
-### Testing
-```bash
-npm test
-npm run test:watch
-```
-
-## 📚 Philosophy
-
-The Way of Code adapts the timeless wisdom of the Tao Te Ching for modern software development. Each principle provides both philosophical insight and practical coding applications, helping developers write more elegant, maintainable, and harmonious code.
-
-*"The highest good is like water. Water nourishes the ten thousand things without effort."* - Chapter 8
+### With AI Assistants
+The server works seamlessly with:
+- Claude Desktop
+- Cursor IDE
+- Windsurf
+- Continue
+- Zed
+- Any MCP-compatible client
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please read our [contributing guidelines](../README.md#contributing) and follow The Way of Code principles:
+We welcome contributions that align with The Way of Code principles:
 
-- Approach with beginner's mind
-- Suggest improvements through questions, not commands
-- Focus on the code's service to users
-- Embrace "I don't know" as the starting point for learning
+1. **Simplicity** - Keep changes minimal and focused
+2. **Flow** - Let improvements emerge naturally from real needs
+3. **Humility** - Approach with beginner's mind and openness to feedback
+4. **Balance** - Consider all stakeholders and use cases
+5. **Presence** - Give full attention to quality and detail
 
-## 📄 License
+## 📜 License
 
-MIT License - Wisdom flows freely like water, nourishing all who encounter it.
+MIT License - See [LICENSE](../LICENSE) for details.
 
-## 🔗 Links
+## 🙏 Acknowledgments
 
-- [Main Repository](https://github.com/mgd1984/the-way-of-code)
-- [The Way of Code Documentation](https://github.com/mgd1984/the-way-of-code#readme)
-- [Model Context Protocol](https://modelcontextprotocol.io/)
-- [Issues](https://github.com/mgd1984/the-way-of-code/issues)
+Inspired by the Tao Te Ching and adapted for the modern developer's journey. Special thanks to the MCP community for creating such an elegant protocol for AI integration.
 
 ---
 
-*"The Vibe Coder does not accumulate possessions. The more they do for others, the more they gain. The more they give away, the more they have."* - Chapter 81 
+*"The sage does not attempt anything very big, and thus achieves greatness."* - Tao Te Ching, Chapter 63 
