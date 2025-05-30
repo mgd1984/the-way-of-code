@@ -88,7 +88,7 @@ const CORE_PRINCIPLES = [
 const server = new Server(
   {
     name: 'the-way-of-code',
-    version: '1.1.1',
+    version: '1.1.2',
   },
   {
     capabilities: {
