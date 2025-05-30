@@ -137,10 +137,24 @@ Our server implements all three MCP primitives for maximum flexibility:
   }
 }
 ```
+
+<br/>
+
+### 🛠️ MCP Tools Overview
+
 <p align="center">
-  <img src="./mcp-tools.png" alt="MCP Tools Overview" width="600"/><br/>
+  <img src="./mcp-tools.png" alt="MCP Tools Overview" width="600"/>
+</p>
+
+<br/>
+
+### 📚 MCP Resources Overview
+
+<p align="center">
   <img src="./mcp-resources.png" alt="MCP Resources Overview" width="600"/>
 </p>
+
+<br/>
 
 #### Cursor IDE
 ```json
@@ -155,7 +169,8 @@ Our server implements all three MCP primitives for maximum flexibility:
 ```
 <p align="center">
   <img src="./cursor-mcp-setup.png" alt="Cursor MCP Setup" width="600"/>
-```
+</p>
+
 
 #### GitMCP.io Integration
 For instant access without local installation:
