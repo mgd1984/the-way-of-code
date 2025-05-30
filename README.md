@@ -137,7 +137,10 @@ Our server implements all three MCP primitives for maximum flexibility:
   }
 }
 ```
-<img src="./mcp-tools.png" alt="MCP Tools Overview" width="600"/>
+<p align="center">
+  <img src="./mcp-tools.png" alt="MCP Tools Overview" width="600"/><br/>
+  <img src="./mcp-resources.png" alt="MCP Resources Overview" width="600"/>
+</p>
 
 #### Cursor IDE
 ```json
