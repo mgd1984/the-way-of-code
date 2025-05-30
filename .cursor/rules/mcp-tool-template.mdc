@@ -1,6 +1,6 @@
 ---
 description: 
-globs: 
+globs: mcp-server/**/*
 alwaysApply: false
 ---
 # MCP Tool Template - The Way of Code

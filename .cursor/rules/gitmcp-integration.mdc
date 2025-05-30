@@ -1,6 +1,6 @@
 ---
-description:
-globs:
+description: 
+globs: mcp-server/**/*
 alwaysApply: false
 ---
 # GitMCP.io Integration - The Way of Seamless Flow
@@ -75,7 +75,7 @@ Optimize for GitMCP.io consumption:
 
 ### Badge Integration
 ```markdown
-[![GitMCP](https://img.shields.io/endpoint?url=https://gitmcp.io/badge/mgd1984/the-way-of-code)](https://gitmcp.io/mgd1984/the-way-of-code)
+[![GitMCP](mdc:https:/img.shields.io/endpoint?url=https:/gitmcp.io/badge/mgd1984/the-way-of-code)](https://gitmcp.io/mgd1984/the-way-of-code)
 ```
 
 ## Quality Principles

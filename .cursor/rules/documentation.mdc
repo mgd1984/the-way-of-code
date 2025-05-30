@@ -1,6 +1,6 @@
 ---
 description: 
-globs: 
+globs: **/*.md,text/**/*,examples/**/*,principles/**/*,**/*.txt
 alwaysApply: false
 ---
 # Documentation - The Way of Code

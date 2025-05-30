@@ -19,13 +19,13 @@ import {
 import { z } from 'zod';
 import { wayOfCodeData } from './data/way-of-code.js';
 
-// Zod schemas for validation (keep these for runtime validation)
+// Input validation schemas - simple and focused
 const GetChapterSchema = z.object({
   chapter: z.number().min(1).max(81),
 });
 
 const SearchPrinciplesSchema = z.object({
-  query: z.string(),
+  query: z.string().min(1),
   context: z.string().optional(),
 });
 
@@ -40,6 +40,49 @@ const GetPrinciplesByTopicSchema = z.object({
     'refactoring', 'architecture', 'collaboration', 'leadership'
   ]),
 });
+
+const FindWisdomByKeywordSchema = z.object({
+  keyword: z.string().min(1),
+  limit: z.number().min(1).max(20).optional(),
+});
+
+const GetPhilosophicalContextSchema = z.object({
+  aspect: z.enum(['origins', 'taoism', 'wu-wei', 'yin-yang', 'practical-application', 'modern-relevance']).optional(),
+});
+
+// Core principles - the foundation of The Way of Code
+const CORE_PRINCIPLES = [
+  {
+    title: "Simplicity Over Complexity",
+    description: "Choose the simplest solution that works. Complexity should emerge naturally from necessity, not from cleverness.",
+    chapters: [1, 19, 31],
+    keywords: ["simplicity", "elegant", "minimal"]
+  },
+  {
+    title: "Flow Over Force", 
+    description: "Don't force solutions; let them emerge naturally. Work with the grain of the problem, not against it.",
+    chapters: [3, 8, 43],
+    keywords: ["flow", "water", "wu-wei", "natural"]
+  },
+  {
+    title: "Humility Over Ego",
+    description: "Code without attachment to being 'right'. The best solutions often come from admitting what you don't know.",
+    chapters: [17, 66, 71],
+    keywords: ["humility", "ego", "learning", "openness"]
+  },
+  {
+    title: "Balance Over Extremes",
+    description: "Neither too rigid nor too loose. Find the middle way between over-engineering and under-engineering.",
+    chapters: [9, 22, 76],
+    keywords: ["balance", "moderation", "stability", "harmony"]
+  },
+  {
+    title: "Presence Over Rushing",
+    description: "Code with full attention to the current task. Quality emerges from mindful, present-moment awareness.",
+    chapters: [10, 15, 63],
+    keywords: ["presence", "mindfulness", "attention", "quality"]
+  }
+] as const;
 
 // Create server with enhanced capabilities
 const server = new Server(
@@ -110,43 +153,11 @@ server.setRequestHandler(ReadResourceRequestSchema, async (request: ReadResource
       };
 
     case 'way://principles/core':
-      const corePrinciples = [
-        {
-          title: "Simplicity Over Complexity",
-          description: "Choose the simplest solution that works. Complexity should emerge naturally from necessity, not from cleverness.",
-          chapters: [1, 19, 31],
-          keywords: ["simplicity", "elegant", "minimal"]
-        },
-        {
-          title: "Flow Over Force", 
-          description: "Don't force solutions; let them emerge naturally. Work with the grain of the problem, not against it.",
-          chapters: [3, 8, 43],
-          keywords: ["flow", "water", "wu-wei", "natural"]
-        },
-        {
-          title: "Humility Over Ego",
-          description: "Code without attachment to being 'right'. The best solutions often come from admitting what you don't know.",
-          chapters: [17, 66, 71],
-          keywords: ["humility", "ego", "learning", "openness"]
-        },
-        {
-          title: "Balance Over Extremes",
-          description: "Neither too rigid nor too loose. Find the middle way between over-engineering and under-engineering.",
-          chapters: [9, 22, 76],
-          keywords: ["balance", "moderation", "stability", "harmony"]
-        },
-        {
-          title: "Presence Over Rushing",
-          description: "Code with full attention to the current task. Quality emerges from mindful, present-moment awareness.",
-          chapters: [10, 15, 63],
-          keywords: ["presence", "mindfulness", "attention", "quality"]
-        }
-      ];
       return {
         contents: [{
           uri,
           mimeType: 'application/json',
-          text: JSON.stringify(corePrinciples, null, 2)
+          text: JSON.stringify(CORE_PRINCIPLES, null, 2)
         }]
       };
 
@@ -684,14 +695,21 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
 
       case 'search_principles': {
         const { query, context } = SearchPrinciplesSchema.parse(args);
-        const searchTerms = query.toLowerCase().split(' ');
+        const searchTerms = query.toLowerCase().split(/\s+/);
         
-        const relevantChapters = wayOfCodeData.chapters.filter(chapter => {
+        // Score chapters by relevance
+        const scoredChapters = wayOfCodeData.chapters.map(chapter => {
           const searchText = `${chapter.text} ${chapter.codingApplication} ${chapter.keywords.join(' ')}`.toLowerCase();
-          return searchTerms.some(term => searchText.includes(term));
-        }).slice(0, 5); // Limit to top 5 results
+          const score = searchTerms.reduce((acc, term) => {
+            const termCount = (searchText.match(new RegExp(term, 'g')) || []).length;
+            return acc + termCount;
+          }, 0);
+          return { chapter, score };
+        }).filter(({ score }) => score > 0)
+          .sort((a, b) => b.score - a.score)
+          .slice(0, 5);
 
-        if (relevantChapters.length === 0) {
+        if (scoredChapters.length === 0) {
           return {
             content: [
               {
@@ -702,7 +720,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
           };
         }
 
-        const results = relevantChapters.map(chapter => 
+        const results = scoredChapters.map(({ chapter }) => 
           `**Chapter ${chapter.number}**\n${chapter.text}\n\n*Application:* ${chapter.codingApplication}`
         ).join('\n\n---\n\n');
 
@@ -712,7 +730,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
           content: [
             {
               type: 'text',
-              text: `Found ${relevantChapters.length} relevant principles for "${query}":${contextNote}\n\n${results}`,
+              text: `Found ${scoredChapters.length} relevant principles for "${query}":${contextNote}\n\n${results}`,
             },
           ],
         };
@@ -798,35 +816,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
       }
 
       case 'get_core_principles': {
-        const corePrinciples = [
-          {
-            title: "Simplicity Over Complexity",
-            description: "Choose the simplest solution that works. Complexity should emerge naturally from necessity, not from cleverness.",
-            chapters: [1, 19, 31]
-          },
-          {
-            title: "Flow Over Force", 
-            description: "Don't force solutions; let them emerge naturally. Work with the grain of the problem, not against it.",
-            chapters: [3, 8, 43]
-          },
-          {
-            title: "Humility Over Ego",
-            description: "Code without attachment to being 'right'. The best solutions often come from admitting what you don't know.",
-            chapters: [17, 66, 71]
-          },
-          {
-            title: "Balance Over Extremes",
-            description: "Neither too rigid nor too loose. Find the middle way between over-engineering and under-engineering.",
-            chapters: [9, 22, 76]
-          },
-          {
-            title: "Presence Over Rushing",
-            description: "Code with full attention to the current task. Quality emerges from mindful, present-moment awareness.",
-            chapters: [10, 15, 63]
-          }
-        ];
-
-        const principleText = corePrinciples.map(principle => 
+        const principleText = CORE_PRINCIPLES.map(principle => 
           `**${principle.title}**\n${principle.description}\n*See chapters: ${principle.chapters.join(', ')}*`
         ).join('\n\n');
 
@@ -841,16 +831,11 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
       }
 
       case 'find_wisdom_by_keyword': {
-        const keyword = (args?.keyword as string)?.toLowerCase() || '';
-        const limit = Math.min((args?.limit as number) || 5, 20);
+        const { keyword, limit = 5 } = FindWisdomByKeywordSchema.parse(args);
         
-        if (!keyword) {
-          throw new Error('Keyword is required');
-        }
-
         const matchingChapters = wayOfCodeData.chapters.filter(chapter => {
           const searchText = `${chapter.text} ${chapter.codingApplication} ${chapter.keywords.join(' ')}`.toLowerCase();
-          return searchText.includes(keyword);
+          return searchText.includes(keyword.toLowerCase());
         }).slice(0, limit);
 
         if (matchingChapters.length === 0) {
@@ -879,7 +864,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
       }
 
       case 'get_philosophical_context': {
-        const aspect = (args?.aspect as string) || 'origins';
+        const { aspect = 'origins' } = GetPhilosophicalContextSchema.parse(args);
         
         const contexts: Record<string, string> = {
           origins: `**Origins of The Way of Code**

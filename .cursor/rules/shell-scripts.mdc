@@ -1,6 +1,6 @@
 ---
 description: 
-globs: 
+globs: **/*.sh,git-hooks/**/*,install.sh,**/*.bash
 alwaysApply: false
 ---
 # Shell Scripts - The Way of Code

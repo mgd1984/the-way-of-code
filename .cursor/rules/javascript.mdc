@@ -1,6 +1,6 @@
 ---
 description: 
-globs: 
+globs: **/*.js,scripts/**/*,**/*.mjs
 alwaysApply: false
 ---
 # JavaScript Development - The Way of Code

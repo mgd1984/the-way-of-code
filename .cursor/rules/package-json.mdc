@@ -1,6 +1,6 @@
 ---
 description: 
-globs: 
+globs: **/package.json,**/tsconfig.json,**/*.config.js,**/*.config.ts
 alwaysApply: false
 ---
 # Project Configuration - The Way of Code

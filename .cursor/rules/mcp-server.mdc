@@ -1,6 +1,6 @@
 ---
 description: 
-globs: 
+globs: mcp-server/**/*
 alwaysApply: false
 ---
 # MCP Server Development - The Way of Code
