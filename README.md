@@ -101,28 +101,33 @@ npm install -g the-way-of-code
 Our server implements all three MCP primitives for maximum flexibility:
 
 #### 🛠️ **Tools** (Model-Controlled)
-- `get_chapter` - Retrieve specific chapters (1-81)
-- `search_principles` - Find relevant wisdom for coding situations
-- `get_daily_wisdom` - Get today's wisdom based on current date
-- `get_principles_by_topic` - Access principles by topic (simplicity, flow, etc.)
-- `get_core_principles` - The five fundamental principles
-- `find_wisdom_by_keyword` - Search chapters by keywords
-- `get_philosophical_context` - Deep philosophical background
+<details>
+<summary>1. <strong>Direct Reference</strong></summary>
 
-#### 📚 **Resources** (Application-Controlled)
-- `way://chapters/all` - Complete chapter collection (JSON)
-- `way://principles/core` - Core principles (JSON)
-- `way://wisdom/daily` - Daily wisdom (Markdown)
-- `way://philosophy/overview` - Complete philosophical framework (Markdown)
-- `way://keywords/index` - Searchable keyword index (JSON)
+- Link to specific chapters in your AI prompts
+- Include principles in your project documentation
+- Reference in code comments for context
 
-#### 💡 **Prompts** (User-Controlled)
-- `code-review-wisdom` - Philosophical code review guidance
-- `debug-with-presence` - Mindful debugging approach
-- `architecture-balance` - Balanced system design
-- `refactor-with-flow` - Natural code refactoring
-- `team-collaboration` - Harmonious team dynamics
-- `daily-reflection` - End-of-day practice reflection
+</details>
+
+<details open>
+<summary>2. <strong>MCP Server</strong> (Recommended)</summary>
+
+- Real-time access to relevant chapters
+- Context-aware principle suggestions
+- Integration with Cursor, Claude, and other MCP-compatible tools
+
+</details>
+
+<details>
+<summary>3. <strong>Cursor Rules</strong></summary>
+
+- Modern `.cursor/rules/` directory structure
+- Auto-attached rules based on file patterns
+- Manual rules for specific guidance (@rule-name)
+- Philosophical principles integrated into development workflow
+
+</details>
 
 ### 🔧 Configuration Examples
 
@@ -183,25 +188,31 @@ The complete 81 chapters of The Way of Code are organized for easy reference and
 ## 🛠 Integration Methods
 
 ### 1. **Direct Reference**
+<details>
 - Link to specific chapters in your AI prompts
 - Include principles in your project documentation
 - Reference in code comments for context
+</details>
 
 ### 2. **MCP Server** (Recommended)
+<details open>
 - Real-time access to relevant chapters
 - Context-aware principle suggestions
 - Integration with Cursor, Claude, and other MCP-compatible tools
+</details>
 
 ### 3. **Cursor Rules**
+<details>
 - Modern `.cursor/rules/` directory structure
 - Auto-attached rules based on file patterns
 - Manual rules for specific guidance (@rule-name)
 - Philosophical principles integrated into development workflow
+</details>
 
-### 4. **API Access**
+<!-- ### 4. **API Access**
 - RESTful API for programmatic access
 - Webhook integrations
-- Custom tool development
+- Custom tool development -->
 
 ## 🎯 Use Cases
 
