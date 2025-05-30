@@ -1,6 +1,6 @@
 {
   "name": "the-way-of-code",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "MCP server for The Way of Code - vibe coding principles based on Rick Rubin's adaptation of the Tao Te Ching",
   "type": "module",
   "main": "dist/index.js",

@@ -45,7 +45,7 @@ const GetPrinciplesByTopicSchema = z.object({
 const server = new Server(
   {
     name: 'the-way-of-code',
-    version: '1.1.0',
+    version: '1.1.1',
   },
   {
     capabilities: {
