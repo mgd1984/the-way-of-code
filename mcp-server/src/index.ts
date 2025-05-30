@@ -45,7 +45,7 @@ const GetPrinciplesByTopicSchema = z.object({
 const server = new Server(
   {
     name: 'the-way-of-code',
-    version: '1.0.0',
+    version: '1.1.0',
   },
   {
     capabilities: {
@@ -971,9 +971,26 @@ The Way of Code provides a framework for navigating these modern challenges with
 
 // Start the server
 async function main() {
-  const transport = new StdioServerTransport();
-  await server.connect(transport);
-  console.error('The Way of Code MCP Server running on stdio with enhanced capabilities');
+  try {
+    const transport = new StdioServerTransport();
+    
+    // Handle process termination gracefully
+    process.on('SIGINT', () => {
+      console.error('Received SIGINT, shutting down gracefully...');
+      process.exit(0);
+    });
+    
+    process.on('SIGTERM', () => {
+      console.error('Received SIGTERM, shutting down gracefully...');
+      process.exit(0);
+    });
+    
+    await server.connect(transport);
+    console.error('The Way of Code MCP Server running on stdio with enhanced capabilities');
+  } catch (error) {
+    console.error('Failed to start server:', error);
+    process.exit(1);
+  }
 }
 
 main().catch((error) => {
