@@ -1,6 +1,6 @@
 # Cursor Rules - The Way of Code
 
-This directory contains project rules following Cursor's modern MDC format.
+This directory contains project rules following Cursor's modern MDC format, embodying the principle of **Balance Over Extremes** - neither too rigid nor too loose.
 
 ## Rule Structure
 
@@ -25,6 +25,9 @@ This directory contains project rules following Cursor's modern MDC format.
 - `coding-practices.mdc` - Detailed coding guidelines
 - `collaboration.mdc` - Code review and team practices  
 - `mcp-tool-template.mdc` - Template for new MCP tools
+- `gitmcp-integration.mdc` - GitMCP.io integration guidelines
+- `releases.mdc` - Release and versioning process
+- `meta-rules.mdc` - Guidelines for evolving the rules themselves
 
 ### Nested Rules
 - `mcp-server/.cursor/rules/server-specific.mdc` - Server-specific guidelines (auto-applies in mcp-server directory)
@@ -40,14 +43,28 @@ This directory contains project rules following Cursor's modern MDC format.
 | Configuration | `**/package.json`, `**/tsconfig.json` | `package-json.mdc` |
 | MCP Server | `mcp-server/**/*` | `mcp-server.mdc` + nested rule |
 | Git Hooks | `git-hooks/**/*` | `shell-scripts.mdc` |
+| Assets | `docs/assets/**/*` | `documentation.mdc` |
 
-## Usage
+## Usage Philosophy
 
-- Core philosophy is always available
-- File-specific rules auto-attach when working with relevant files
-- Use `@rule-name` to manually include specific rules
-- Nested rules provide context-specific guidance
+- Core philosophy flows through all interactions
+- File-specific rules auto-attach naturally
+- Use `@rule-name` to invoke specific guidance manually
+- Nested rules provide context-aware wisdom
 
-## Migration Notes
+## Evolution and Refinement
 
-This replaces the legacy `.cursorrules` file with a more organized, composable structure following Cursor's best practices. 
+These rules embody the principle of eternal refinement:
+- "The master carves his block, slowly but surely"
+- Each update moves toward greater clarity and usefulness
+- Rules evolve with the project while maintaining philosophical foundation
+- Balance between guidance and freedom
+
+## Recent Enhancements
+
+- Enhanced core philosophy with MCP integration wisdom
+- Added releases rule for versioning process
+- Updated documentation rule for asset organization
+- Refined GitMCP integration guidance
+
+*"True perfection seems imperfect, yet it is perfectly itself"* - Chapter 45 

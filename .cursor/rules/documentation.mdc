@@ -10,33 +10,61 @@ alwaysApply: false
 - Explain the "why" before the "how"
 - Use simple, clear language
 - Let understanding emerge naturally
+- *"The code that can be named is not the eternal code"* - Focus on essence over naming
 
-## Structure
+## Structure Harmony
 - Start with the essential concept
 - Build complexity gradually
 - Use examples that illuminate principles
 - End with practical applications
+- Follow natural information architecture
 
-## Markdown Best Practices
+## Project Organization
+- Keep assets in their proper place: `docs/assets/` for images
+- Reference images with relative paths from project root
+- Maintain clean separation: documentation vs. implementation
+- Use standard patterns that other projects can follow
+
+## GitMCP.io Integration
+- Optimize for AI assistant consumption
+- Maintain comprehensive `llms.txt` file
+- Provide clear integration examples
+- Support multiple setup methods (NPX, GitMCP, manual)
+- Include visual references when helpful
+
+## Markdown Mastery
 - Use consistent heading hierarchy
 - Include code examples that actually work
 - Link to related concepts when helpful
 - Keep paragraphs focused and scannable
+- Employ proper image syntax: `![alt](mdc:docs/assets/image.png)`
 
 ## The Way of Code Documentation
 - Balance philosophical depth with practical utility
 - Include both ancient wisdom and modern applications
 - Make principles immediately actionable
 - Connect abstract concepts to concrete coding practices
+- Reference chapter numbers for deeper exploration
 
 ## Examples and Scenarios
 - Use real-world coding situations
 - Show both the problem and the solution
 - Explain the principle behind the approach
 - Demonstrate the natural flow of good code
+- Include MCP server usage examples
 
-## Maintenance
+## Asset Organization
+- Images: `docs/assets/` directory
+- Visual references support understanding
+- Keep file sizes reasonable for quick loading
+- Use descriptive filenames
+- Maintain 100% git rename tracking when moving files
+
+## Living Documentation
 - Keep documentation current with code changes
 - Remove outdated information promptly
 - Update examples to reflect best practices
 - Ensure consistency across all documentation
+- Version documentation with releases
+
+*"True fullness seems empty, yet in use it is inexhaustible"* - Chapter 45
