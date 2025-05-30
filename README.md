@@ -153,6 +153,9 @@ Our server implements all three MCP primitives for maximum flexibility:
   }
 }
 ```
+<p align="center">
+  <img src="./cursor-mcp-setup.png" alt="Cursor MCP Setup" width="600"/>
+```
 
 #### GitMCP.io Integration
 For instant access without local installation:
