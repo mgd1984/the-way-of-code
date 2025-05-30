@@ -193,9 +193,10 @@ The complete 81 chapters of The Way of Code are organized for easy reference and
 - Integration with Cursor, Claude, and other MCP-compatible tools
 
 ### 3. **Cursor Rules**
-- Pre-configured `.cursorrules` files
-- Project-specific principle sets
-- Automatic principle injection
+- Modern `.cursor/rules/` directory structure
+- Auto-attached rules based on file patterns
+- Manual rules for specific guidance (@rule-name)
+- Philosophical principles integrated into development workflow
 
 ### 4. **API Access**
 - RESTful API for programmatic access
