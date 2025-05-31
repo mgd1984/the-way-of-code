@@ -76,15 +76,12 @@ describe('The Way of Code MCP Server', () => {
     });
   });
 
-  describe('Daily Wisdom Logic', () => {
-    test('should map day of year to valid chapter numbers', () => {
-      for (let day = 1; day <= 365; day++) {
-        const chapterNumber = ((day - 1) % 81) + 1;
-        expect(chapterNumber).toBeGreaterThanOrEqual(1);
-        expect(chapterNumber).toBeLessThanOrEqual(81);
-        
+  describe('Chapter Access', () => {
+    test('should provide direct access to any chapter by number', () => {
+      for (let chapterNumber = 1; chapterNumber <= 81; chapterNumber++) {
         const chapter = wayOfCodeData.chapters.find(c => c.number === chapterNumber);
         expect(chapter).toBeDefined();
+        expect(chapter?.number).toBe(chapterNumber);
       }
     });
   });

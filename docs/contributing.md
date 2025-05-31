@@ -41,7 +41,7 @@ Contributing to The Way of Code should itself embody the five pillars:
 ### 2. **Improve Integration**
 - Enhance setup guides for different AI assistants
 - Add configuration examples for new tools
-- Update `examples/integration/`
+- Update integration examples in main README
 
 ### 3. **Enhance Documentation**
 - Clarify confusing explanations

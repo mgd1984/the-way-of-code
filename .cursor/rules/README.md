@@ -5,7 +5,7 @@ This directory contains project rules following Cursor's modern MDC format, embo
 ## Rule Structure
 
 ### Always Applied Rules
-- `core-philosophy.mdc` - The five pillars and daily wisdom (always active)
+- `core-philosophy.mdc` - The five pillars and essential wisdom (always active)
 
 ### Auto-Attached Rules (by file pattern)
 - `typescript.mdc` - TypeScript guidelines

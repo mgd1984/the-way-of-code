@@ -199,7 +199,7 @@ Each capability serves a different aspect of the development journey, from quick
 
 The complete 81 chapters of The Way of Code are organized for easy reference and integration:
 
-- **[Complete Text](./text/complete.md)** - All 81 chapters with core principles
+- **[The Way of Code](./THE_WAY_OF_CODE.md)** - Complete 81 chapters with core principles
 
 ## 🛠 Integration Methods
 

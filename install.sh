@@ -107,7 +107,7 @@ This project follows The Way of Code principles for vibe-coding.
 ## Resources
 
 - [Full Text](https://github.com/mgd1984/the-way-of-code)
-- [Complete Text](https://github.com/mgd1984/the-way-of-code/blob/main/text/complete.md)
+- [The Way of Code](https://github.com/mgd1984/the-way-of-code/blob/main/THE_WAY_OF_CODE.md)
 
 
 ---
