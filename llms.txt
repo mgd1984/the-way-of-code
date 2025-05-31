@@ -24,26 +24,14 @@ Code emerges from understanding. Understanding emerges from practice.
 
 ### Tools
 ```typescript
-get_chapter(n: 1..81)                    // Direct access
-search_principles(query, context?, limit?) // Semantic search
-get_principles_by_topic(topic)           // Structured wisdom
-get_core_principles()                    // Essential five
-get_philosophical_context(aspect?)       // Deep background
+get_chapter(chapter: 1..81)      // Direct access to any chapter
+search_principles(query)         // Find relevant wisdom  
+get_core_principles()            // The five essential pillars
 ```
 
-### Resources
+### Resource
 ```
-way://chapters/all       // Complete collection (JSON)
-way://principles/core    // The five pillars (JSON)
-way://philosophy/overview // Framework (Markdown)
-way://keywords/index     // Search index (JSON)
-```
-
-### Prompts
-```
-code_review_with_tao     // Philosophical review
-debugging_meditation     // Mindful troubleshooting
-architecture_guidance    // Design wisdom
+way://chapters/all               // Complete collection (JSON)
 ```
 
 ---
@@ -68,20 +56,17 @@ npx the-way-of-code
 
 ### Usage
 ```typescript
+// Get specific wisdom
+await mcp.call('get_chapter', { chapter: 8 });
+
 // Search for guidance
-await mcp.call('search_principles', {
-  query: 'debugging complex systems',
-  context: 'Production issue'
-});
+await mcp.call('search_principles', { query: 'debugging' });
 
-// Access wisdom
+// Core principles
+await mcp.call('get_core_principles', {});
+
+// Access all chapters
 await mcp.readResource('way://chapters/all');
-
-// Get structured guidance
-await mcp.getPrompt('code_review_with_tao', {
-  code: source,
-  focus: 'simplicity'
-});
 ```
 
 ---
@@ -108,7 +93,7 @@ Every commit is both progress and practice. Code toward perfection while accepti
 
 **THE_WAY_OF_CODE.md** — Complete wisdom, 81 chapters  
 **mcp-server/** — Technical implementation  
-**examples/** — Practical applications  
+**examples.md** — Essential templates
 **.cursor/** — Development rules
 
 The source adapts to every container while remaining unchanged.

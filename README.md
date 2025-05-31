@@ -53,19 +53,16 @@ The master debugger does not force solutions—they create space for clarity to 
 
 ## Implementation
 
-**Tools** — Five focused instruments  
-**Resources** — Structured wisdom  
-**Prompts** — Essential workflows
+**Tools** — Three focused instruments  
+**Resource** — Complete wisdom
 
-Each primitive serves its nature. Together, they form a complete system.
+Together, they form a complete system.
 
 ```typescript
 // The tools
-get_chapter(n: 1..81)
+get_chapter(chapter: 1..81)
 search_principles(query: string)
-get_principles_by_topic(topic: Topic)
 get_core_principles()
-get_philosophical_context(aspect?: Aspect)
 ```
 
 No more than necessary. No less than sufficient.
@@ -103,9 +100,7 @@ The source adapts to every container while remaining unchanged.
 
 ## Examples
 
-Scenarios that illuminate practice:
-- **[Prompts](./examples/prompts/)** — Templates for common situations  
-- **[Scenarios](./examples/scenarios/)** — Real-world applications
+**[examples.md](./examples.md)** — Essential templates
 
 The way is shown, not explained.
 
