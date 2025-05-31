@@ -74,7 +74,7 @@ Add to your configuration:
 ### For MCP-Compatible Tools
 Connect to our MCP server for real-time access to The Way of Code:
 ```bash
-npm install -g @the-way-of-code/mcp-server
+npm install -g the-way-of-code
 ```
 
 ### For Any AI Assistant
@@ -101,6 +101,25 @@ npm install -g the-way-of-code
 Our server implements all three MCP primitives for maximum flexibility:
 
 #### 🛠️ **Tools** (Model-Controlled)
+Five focused tools that provide access to wisdom:
+- `get_chapter` - Retrieve specific chapters (1-81)
+- `search_principles` - Unified search for relevant principles
+- `get_principles_by_topic` - Get principles by coding topic
+- `get_core_principles` - The five fundamental principles
+- `get_philosophical_context` - Deep philosophical background
+
+#### 📚 **Resources** (Application-Controlled)
+Structured data for AI context:
+- Complete chapter collection (JSON)
+- Core principles reference (JSON)
+- Philosophical overview (Markdown)
+- Searchable keyword index (JSON)
+
+#### 💡 **Prompts** (User-Controlled)
+Essential templated workflows:
+- `code_review_with_tao` - Philosophical code review guidance
+- `debugging_meditation` - Mindful debugging approach
+- `architecture_guidance` - System design with Taoist principles
 <details>
 <summary>1. <strong>Direct Reference</strong></summary>
 
@@ -180,10 +199,7 @@ Each capability serves a different aspect of the development journey, from quick
 
 The complete 81 chapters of The Way of Code are organized for easy reference and integration:
 
-- **[Core Principles](./principles/core-principles.md)** - Essential concepts for daily coding
-- **[Complete Text](./text/complete.md)** - All 81 chapters
-- **[Chapter Index](./text/index.md)** - Quick reference by topic
-- **[Daily Wisdom](./daily/)** - Chapter-a-day format
+- **[Complete Text](./text/complete.md)** - All 81 chapters with core principles
 
 ## 🛠 Integration Methods
 

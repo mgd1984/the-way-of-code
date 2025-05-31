@@ -25,26 +25,23 @@ The Way of Code is a philosophical approach to software development inspired by 
 #### Tools (Model-Controlled)
 - `get_chapter`: Retrieve specific chapters (1-81)
 - `search_principles`: Search for relevant principles by query
-- `get_daily_wisdom`: Get daily wisdom based on date
+
 - `get_principles_by_topic`: Get principles by topic
 - `get_core_principles`: Get the five core principles
-- `find_wisdom_by_keyword`: Search chapters by keywords
+
 - `get_philosophical_context`: Deep philosophical background
 
 #### Resources (Application-Controlled)
 - `way://chapters/all`: Complete chapter collection (JSON)
 - `way://principles/core`: Core principles (JSON)
-- `way://wisdom/daily`: Daily wisdom (Markdown)
+
 - `way://philosophy/overview`: Complete philosophical framework (Markdown)
 - `way://keywords/index`: Searchable keyword index (JSON)
 
 #### Prompts (User-Controlled)
-- `code-review-wisdom`: Philosophical code review guidance
-- `debug-with-presence`: Mindful debugging approach
-- `architecture-balance`: Balanced system design
-- `refactor-with-flow`: Natural code refactoring
-- `team-collaboration`: Harmonious team dynamics
-- `daily-reflection`: End-of-day practice reflection
+- `code_review_with_tao`: Philosophical code review guidance
+- `debugging_meditation`: Mindful debugging approach
+- `architecture_guidance`: System design with Taoist principles
 
 ### Cursor Integration (`.cursor/`)
 - **Rules**: Modern MDC format rules with philosophical guidance
@@ -92,14 +89,7 @@ Both provide seamless integration with AI coding assistants and real-time access
 
 ## Usage Examples
 
-### Getting Daily Wisdom
-```typescript
-// Get today's wisdom
-const wisdom = await mcp.call('get_daily_wisdom');
 
-// Get wisdom for specific date
-const wisdom = await mcp.call('get_daily_wisdom', { date: '2025-01-01' });
-```
 
 ### Searching for Guidance
 ```typescript
@@ -114,7 +104,7 @@ const principles = await mcp.call('search_principles', {
 ```typescript
 // Get structured guidance for code review
 const review = await mcp.call('get_prompt', {
-  name: 'code-review-wisdom',
+  name: 'code_review_with_tao',
   arguments: { 
     code: 'function complex() { ... }',
     focus: 'simplicity'
@@ -129,9 +119,9 @@ const principles = await mcp.call('read_resource', {
   uri: 'way://principles/core'
 });
 
-// Get today's wisdom as markdown
-const daily = await mcp.call('read_resource', {
-  uri: 'way://wisdom/daily'
+// Get philosophical overview
+const philosophy = await mcp.call('read_resource', {
+  uri: 'way://philosophy/overview'
 });
 ```
 

@@ -2,7 +2,19 @@
 
 *"The sage stays behind, thus he is ahead. He leads without commanding."* - Chapter 17
 
-## Prompt Template
+This example demonstrates using the `code_review_with_tao` prompt with The Way of Code MCP server.
+
+## MCP Prompt Usage
+
+```javascript
+// Using the MCP server prompt
+const prompt = await client.getPrompt("code_review_with_tao", {
+  code: "function calculate(x, y) { return x * y + 10; }",
+  focus: "simplicity"
+});
+```
+
+## Manual Template
 
 ```
 Please review the following code using The Way of Code principles:

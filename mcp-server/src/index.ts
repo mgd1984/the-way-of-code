@@ -24,13 +24,10 @@ const GetChapterSchema = z.object({
   chapter: z.number().min(1).max(81),
 });
 
-const SearchPrinciplesSchema = z.object({
+const SearchWisdomSchema = z.object({
   query: z.string().min(1),
   context: z.string().optional(),
-});
-
-const GetDailyWisdomSchema = z.object({
-  date: z.string().optional(),
+  limit: z.number().min(1).max(20).optional(),
 });
 
 const GetPrinciplesByTopicSchema = z.object({
@@ -39,11 +36,6 @@ const GetPrinciplesByTopicSchema = z.object({
     'balance', 'extremes', 'presence', 'rushing', 'debugging', 
     'refactoring', 'architecture', 'collaboration', 'leadership'
   ]),
-});
-
-const FindWisdomByKeywordSchema = z.object({
-  keyword: z.string().min(1),
-  limit: z.number().min(1).max(20).optional(),
 });
 
 const GetPhilosophicalContextSchema = z.object({
@@ -118,12 +110,6 @@ server.setRequestHandler(ListResourcesRequestSchema, async () => {
         mimeType: 'application/json'
       },
       {
-        uri: 'way://wisdom/daily',
-        name: 'Daily Wisdom',
-        description: 'Today\'s wisdom chapter based on current date',
-        mimeType: 'text/plain'
-      },
-      {
         uri: 'way://philosophy/overview',
         name: 'Philosophy Overview',
         description: 'Complete philosophical framework and background',
@@ -161,32 +147,6 @@ server.setRequestHandler(ReadResourceRequestSchema, async (request: ReadResource
         }]
       };
 
-    case 'way://wisdom/daily':
-      const today = new Date();
-      const dayOfYear = Math.floor((today.getTime() - new Date(today.getFullYear(), 0, 0).getTime()) / (1000 * 60 * 60 * 24));
-      const chapterNumber = ((dayOfYear - 1) % 81) + 1;
-      const dailyChapter = wayOfCodeData.chapters.find(c => c.number === chapterNumber);
-      
-      const dailyWisdom = `# Daily Wisdom - ${today.toDateString()}
-
-## Chapter ${dailyChapter?.number}
-
-${dailyChapter?.text}
-
-## Today's Coding Reflection
-
-${dailyChapter?.codingApplication}
-
-*Keywords: ${dailyChapter?.keywords.join(', ')}*`;
-
-      return {
-        contents: [{
-          uri,
-          mimeType: 'text/markdown',
-          text: dailyWisdom
-        }]
-      };
-
     case 'way://philosophy/overview':
       const philosophyOverview = `# The Way of Code: Philosophical Framework
 
@@ -199,28 +159,33 @@ The Way of Code draws from ancient Taoist wisdom, particularly the Tao Te Ching,
 ### Wu Wei (無為) - Non-Action
 In coding, this means not forcing solutions but allowing them to emerge naturally from understanding the problem deeply. The best code often writes itself when we truly comprehend what needs to be done.
 
-### Yin and Yang - Balance
-Every technical decision involves trade-offs. The Way of Code teaches us to find harmony between:
-- Simplicity and functionality
-- Performance and readability  
-- Innovation and stability
-- Individual brilliance and team collaboration
+### Yin-Yang (陰陽) - Balance and Complementarity  
+Every technical decision involves trade-offs. The art is finding harmony between opposing forces: performance vs. readability, innovation vs. stability, individual excellence vs. team harmony.
 
-### Te (德) - Virtue in Code
-True mastery comes not from showing off technical prowess, but from writing code that serves others - maintainable, readable, and purposeful.
+### Ziran (自然) - Naturalness and Spontaneity
+Code should feel natural to read and modify. The best architectures emerge organically from understanding the problem domain, not from forcing predetermined patterns.
 
-## Practical Applications
+### Te (德) - Virtue and Quiet Power
+True technical leadership comes from serving others' growth and the greater good, not from domination or showing off.
 
-This philosophy manifests in daily practice through:
-- Mindful coding sessions
-- Embracing uncertainty and learning
-- Collaborative problem-solving
-- Sustainable development practices
-- Continuous reflection and improvement
+## Practical Application
 
-## The 81 Chapters
+1. **Mindful Development**: Approach each coding session with presence and intention
+2. **Sustainable Practices**: Build for the long term, not just immediate needs  
+3. **Collaborative Excellence**: Share knowledge freely and learn from others
+4. **Adaptive Architecture**: Create systems that can evolve gracefully
+5. **Quality Focus**: Emphasize depth over breadth, substance over style
 
-Each chapter represents a facet of this philosophy, offering both ancient wisdom and practical coding applications. Together, they form a complete guide for the mindful developer.`;
+## Modern Relevance
+
+In our fast-paced world, these ancient principles offer crucial balance:
+- Mindfulness vs. Multitasking
+- Sustainability vs. Speed  
+- Collaboration vs. Competition
+- Simplicity vs. Feature Creep
+- Human-Centered vs. Technology-Centered approaches
+
+The Way of Code provides a framework for navigating modern development challenges with timeless wisdom.`;
 
       return {
         contents: [{
@@ -231,15 +196,19 @@ Each chapter represents a facet of this philosophy, offering both ancient wisdom
       };
 
     case 'way://keywords/index':
-      const keywordIndex = wayOfCodeData.chapters.reduce((index: Record<string, number[]>, chapter) => {
+      // Create a searchable index of all keywords
+      const keywordIndex = wayOfCodeData.chapters.reduce((acc, chapter) => {
         chapter.keywords.forEach(keyword => {
-          if (!index[keyword]) {
-            index[keyword] = [];
+          if (!acc[keyword]) {
+            acc[keyword] = [];
           }
-          index[keyword].push(chapter.number);
+          acc[keyword].push({
+            chapter: chapter.number,
+            excerpt: chapter.text.substring(0, 150) + '...'
+          });
         });
-        return index;
-      }, {});
+        return acc;
+      }, {} as Record<string, Array<{ chapter: number; excerpt: string }>>);
 
       return {
         contents: [{
@@ -255,103 +224,55 @@ Each chapter represents a facet of this philosophy, offering both ancient wisdom
 });
 
 // === PROMPTS IMPLEMENTATION ===
-// Prompts provide templated workflows and interactions
+// Prompts provide templates for common workflows
 
 server.setRequestHandler(ListPromptsRequestSchema, async () => {
   return {
     prompts: [
       {
-        name: 'code-review-wisdom',
-        description: 'Apply Way of Code principles to review code for philosophical alignment',
+        name: 'code_review_with_tao',
+        description: 'Review code following The Way of Code principles',
         arguments: [
           {
             name: 'code',
-            description: 'The code to review',
+            description: 'Code to review',
             required: true
           },
           {
             name: 'focus',
-            description: 'Specific principle to focus on (simplicity, flow, humility, balance, presence)',
+            description: 'Specific aspect to focus on (simplicity, flow, etc.)',
             required: false
           }
         ]
       },
       {
-        name: 'debug-with-presence',
-        description: 'Approach debugging with mindfulness and systematic thinking',
-        arguments: [
-          {
-            name: 'problem_description',
-            description: 'Description of the bug or issue',
-            required: true
-          },
-          {
-            name: 'context',
-            description: 'Additional context about the system or environment',
-            required: false
-          }
-        ]
-      },
-      {
-        name: 'architecture-balance',
-        description: 'Design system architecture following the principle of balance',
+        name: 'architecture_guidance',
+        description: 'Get architectural guidance based on Taoist principles',
         arguments: [
           {
             name: 'requirements',
-            description: 'System requirements and constraints',
+            description: 'System requirements or constraints',
             required: true
           },
           {
-            name: 'scale',
-            description: 'Expected scale (small, medium, large, enterprise)',
+            name: 'current_challenges',
+            description: 'Current architectural challenges',
             required: false
           }
         ]
       },
       {
-        name: 'refactor-with-flow',
-        description: 'Refactor code following the principle of natural flow',
+        name: 'debugging_meditation',
+        description: 'Mindful approach to debugging complex issues',
         arguments: [
           {
-            name: 'current_code',
-            description: 'The code that needs refactoring',
+            name: 'problem_description',
+            description: 'Description of the issue',
             required: true
           },
           {
-            name: 'pain_points',
-            description: 'Specific issues or pain points with current implementation',
-            required: false
-          }
-        ]
-      },
-      {
-        name: 'team-collaboration',
-        description: 'Foster team collaboration using Way of Code principles',
-        arguments: [
-          {
-            name: 'situation',
-            description: 'The team situation or challenge',
-            required: true
-          },
-          {
-            name: 'team_size',
-            description: 'Size of the team',
-            required: false
-          }
-        ]
-      },
-      {
-        name: 'daily-reflection',
-        description: 'End-of-day reflection on coding practice and growth',
-        arguments: [
-          {
-            name: 'accomplishments',
-            description: 'What was accomplished today',
-            required: false
-          },
-          {
-            name: 'challenges',
-            description: 'Challenges faced during the day',
+            name: 'attempted_solutions',
+            description: 'What has been tried so far',
             required: false
           }
         ]
@@ -364,199 +285,110 @@ server.setRequestHandler(GetPromptRequestSchema, async (request: GetPromptReques
   const { name, arguments: args } = request.params;
 
   switch (name) {
-    case 'code-review-wisdom':
+    case 'code_review_with_tao': {
       const code = args?.code || '';
-      const focus = args?.focus || 'all principles';
+      const focus = args?.focus || 'general principles';
       
       return {
-        description: `Apply Way of Code principles to review code with focus on ${focus}`,
+        description: `Code review following The Way of Code principles, focusing on ${focus}`,
         messages: [
           {
             role: 'user',
             content: {
               type: 'text',
-              text: `Please review the following code through the lens of The Way of Code philosophy, focusing on ${focus}:
+              text: `Review this code following The Way of Code principles, specifically focusing on ${focus}:
 
 \`\`\`
 ${code}
 \`\`\`
 
-Consider these aspects:
-- **Simplicity**: Is this the simplest solution that works?
-- **Flow**: Does the code follow natural patterns and logic?
-- **Humility**: Is the code written for others to understand?
-- **Balance**: Are trade-offs well-considered?
-- **Presence**: Does the code show mindful attention to detail?
+Apply these core principles:
+1. **Simplicity Over Complexity**: Is this the simplest solution that works?
+2. **Flow Over Force**: Does the code flow naturally or feel forced?
+3. **Humility Over Ego**: Is the code written to serve its purpose or to impress?
+4. **Balance Over Extremes**: Are there appropriate trade-offs and balance?
+5. **Presence Over Rushing**: Does the code show mindful attention to quality?
 
-Provide specific suggestions for improvement that align with these principles.`
+Provide specific, actionable feedback in the spirit of gentle guidance rather than harsh criticism.`
             }
           }
         ]
       };
+    }
 
-    case 'debug-with-presence':
-      const problemDescription = args?.problem_description || '';
-      const context = args?.context || '';
-      
-      return {
-        description: 'Approach debugging with mindfulness and systematic thinking',
-        messages: [
-          {
-            role: 'user',
-            content: {
-              type: 'text',
-              text: `I'm experiencing this issue: ${problemDescription}
-
-${context ? `Context: ${context}` : ''}
-
-Help me debug this using The Way of Code approach:
-
-1. **Presence**: Let's start by observing the problem without rushing to solutions
-2. **Humility**: What assumptions might I be making that could be wrong?
-3. **Flow**: What is the natural path to understanding this issue?
-4. **Simplicity**: What's the simplest way to isolate and identify the root cause?
-5. **Balance**: How can I fix this without creating new problems?
-
-Guide me through a mindful debugging process.`
-            }
-          }
-        ]
-      };
-
-    case 'architecture-balance':
+    case 'architecture_guidance': {
       const requirements = args?.requirements || '';
-      const scale = args?.scale || 'medium';
+      const challenges = args?.current_challenges || '';
       
       return {
-        description: 'Design system architecture following the principle of balance',
+        description: 'Architectural guidance based on Taoist principles',
         messages: [
           {
             role: 'user',
             content: {
               type: 'text',
-              text: `I need to design a system architecture for a ${scale}-scale project with these requirements:
+              text: `Design architectural guidance for this system following The Way of Code:
 
+**Requirements:**
 ${requirements}
 
-Please help me design this following The Way of Code principles:
+**Current Challenges:**
+${challenges}
 
-- **Balance**: Find the middle way between over-engineering and under-engineering
-- **Simplicity**: Start with the simplest architecture that could work
-- **Flow**: Ensure data and control flow naturally through the system
-- **Humility**: Design for change and acknowledge what we don't know yet
-- **Presence**: Consider both current needs and future growth mindfully
+Apply these principles:
+- **Empty Spaces**: What doesn't need to be built? (Chapter 11)
+- **Natural Flow**: How should data and control flow naturally through the system?
+- **Yielding and Flexibility**: How can the architecture adapt to changing requirements?
+- **Simplicity**: What is the simplest architecture that could work?
+- **Balance**: How to balance different concerns (performance, maintainability, scalability)?
 
-What architecture would you recommend, and how does it embody these principles?`
+Provide architectural guidance that emphasizes sustainability, clarity, and natural evolution over complex abstractions.`
             }
           }
         ]
       };
+    }
 
-    case 'refactor-with-flow':
-      const currentCode = args?.current_code || '';
-      const painPoints = args?.pain_points || '';
+    case 'debugging_meditation': {
+      const problem = args?.problem_description || '';
+      const attempted = args?.attempted_solutions || '';
       
       return {
-        description: 'Refactor code following the principle of natural flow',
+        description: 'Mindful approach to debugging',
         messages: [
           {
             role: 'user',
             content: {
               type: 'text',
-              text: `I need to refactor this code to improve its flow and naturalness:
+              text: `Help me approach this debugging challenge with mindfulness and clarity:
 
-\`\`\`
-${currentCode}
-\`\`\`
+**Problem:**
+${problem}
 
-${painPoints ? `Current pain points: ${painPoints}` : ''}
+**What I've Tried:**
+${attempted}
 
-Please help me refactor this following the principle of Flow from The Way of Code:
+Following The Way of Code for debugging:
+1. **Stillness**: Step back and observe without immediately acting
+2. **Emptiness**: What assumptions can I release?
+3. **Natural Flow**: Where is the system fighting against its natural behavior?
+4. **Wu Wei**: How can I solve this through minimal, precise intervention?
+5. **Beginner's Mind**: What would I notice if seeing this for the first time?
 
-- Like water, code should follow the path of least resistance
-- Remove unnecessary friction and complexity
-- Let the natural structure emerge from the problem domain
-- Ensure smooth transitions between different parts
-- Make the code feel effortless to read and understand
-
-Show me how to transform this code to flow more naturally.`
+Guide me toward a mindful debugging approach that focuses on understanding before action.`
             }
           }
         ]
       };
-
-    case 'team-collaboration':
-      const situation = args?.situation || '';
-      const teamSize = args?.team_size || '';
-      
-      return {
-        description: 'Foster team collaboration using Way of Code principles',
-        messages: [
-          {
-            role: 'user',
-            content: {
-              type: 'text',
-              text: `Our team ${teamSize ? `of ${teamSize} people` : ''} is facing this situation:
-
-${situation}
-
-How can we apply The Way of Code principles to improve our collaboration?
-
-- **Humility**: How can we create space for everyone's ideas and admit when we don't know?
-- **Balance**: How do we balance individual contributions with team harmony?
-- **Flow**: How can we make our collaboration feel natural and effortless?
-- **Presence**: How do we stay mindful and attentive to each other's needs?
-- **Simplicity**: What's the simplest way to resolve this and move forward?
-
-Please provide specific, actionable advice for our team.`
-            }
-          }
-        ]
-      };
-
-    case 'daily-reflection':
-      const accomplishments = args?.accomplishments || '';
-      const challenges = args?.challenges || '';
-      
-      return {
-        description: 'End-of-day reflection on coding practice and growth',
-        messages: [
-          {
-            role: 'user',
-            content: {
-              type: 'text',
-              text: `Let's reflect on today's coding journey:
-
-${accomplishments ? `Accomplishments: ${accomplishments}` : ''}
-${challenges ? `Challenges: ${challenges}` : ''}
-
-Help me reflect on today through The Way of Code lens:
-
-1. **Presence**: How mindful was I in my coding today? When did I rush, and when was I fully present?
-
-2. **Humility**: What did I learn today? What assumptions were challenged? Where did I ask for help?
-
-3. **Flow**: When did my coding feel effortless and natural? When did I fight against the problem?
-
-4. **Balance**: How well did I balance different priorities? What trade-offs did I make?
-
-5. **Simplicity**: Did I choose simple solutions, or did I overcomplicate things?
-
-6. **Growth**: What principle should I focus on tomorrow to continue growing?
-
-Guide me through this reflection to end the day with wisdom and intention.`
-            }
-          }
-        ]
-      };
+    }
 
     default:
-      throw new Error(`Unknown prompt: ${name}`);
+      throw new Error(`Prompt not found: ${name}`);
   }
 });
 
-// === TOOLS IMPLEMENTATION (Enhanced) ===
-// Keep existing tools but enhance them
+// === TOOLS IMPLEMENTATION ===
+// Tools provide callable functions for specific tasks
 
 server.setRequestHandler(ListToolsRequestSchema, async () => {
   return {
@@ -590,22 +422,15 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
             context: {
               type: 'string',
               description: 'Optional context about the coding situation'
+            },
+            limit: {
+              type: 'number',
+              description: 'Maximum number of results to return (default: 5)',
+              minimum: 1,
+              maximum: 20
             }
           },
           required: ['query']
-        },
-      },
-      {
-        name: 'get_daily_wisdom',
-        description: 'Get daily wisdom based on the current date',
-        inputSchema: {
-          type: 'object',
-          properties: {
-            date: {
-              type: 'string',
-              description: 'Date in YYYY-MM-DD format (optional, defaults to today)'
-            }
-          }
         },
       },
       {
@@ -628,27 +453,13 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
         description: 'Get the five core principles of The Way of Code',
         inputSchema: {
           type: 'object',
-          properties: {}
-        },
-      },
-      {
-        name: 'find_wisdom_by_keyword',
-        description: 'Find chapters containing specific keywords or concepts',
-        inputSchema: {
-          type: 'object',
           properties: {
-            keyword: {
+            random_string: {
               type: 'string',
-              description: 'Keyword to search for in chapters'
-            },
-            limit: {
-              type: 'number',
-              description: 'Maximum number of results to return (default: 5)',
-              minimum: 1,
-              maximum: 20
+              description: 'Dummy parameter for no-parameter tools'
             }
           },
-          required: ['keyword']
+          required: ['random_string']
         },
       },
       {
@@ -669,7 +480,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
   };
 });
 
-// Handle tool calls (keep existing + add new ones)
+// Handle tool calls
 server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest) => {
   const { name, arguments: args } = request.params;
 
@@ -694,20 +505,29 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
       }
 
       case 'search_principles': {
-        const { query, context } = SearchPrinciplesSchema.parse(args);
+        const { query, context, limit = 5 } = SearchWisdomSchema.parse(args);
         const searchTerms = query.toLowerCase().split(/\s+/);
         
-        // Score chapters by relevance
+        // Score chapters by relevance - both exact matches and keyword matches
         const scoredChapters = wayOfCodeData.chapters.map(chapter => {
           const searchText = `${chapter.text} ${chapter.codingApplication} ${chapter.keywords.join(' ')}`.toLowerCase();
-          const score = searchTerms.reduce((acc, term) => {
+          
+          // Calculate score based on term frequency and keyword matches
+          let score = 0;
+          searchTerms.forEach(term => {
+            // Higher weight for keyword matches
+            if (chapter.keywords.some(keyword => keyword.toLowerCase().includes(term))) {
+              score += 5;
+            }
+            // Standard weight for text matches
             const termCount = (searchText.match(new RegExp(term, 'g')) || []).length;
-            return acc + termCount;
-          }, 0);
+            score += termCount;
+          });
+          
           return { chapter, score };
         }).filter(({ score }) => score > 0)
           .sort((a, b) => b.score - a.score)
-          .slice(0, 5);
+          .slice(0, limit);
 
         if (scoredChapters.length === 0) {
           return {
@@ -721,7 +541,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
         }
 
         const results = scoredChapters.map(({ chapter }) => 
-          `**Chapter ${chapter.number}**\n${chapter.text}\n\n*Application:* ${chapter.codingApplication}`
+          `**Chapter ${chapter.number}**\n${chapter.text}\n\n*Application:* ${chapter.codingApplication}\n*Keywords:* ${chapter.keywords.join(', ')}`
         ).join('\n\n---\n\n');
 
         const contextNote = context ? `\n\n**Context:** ${context}\n\nThese principles may help guide your approach to this situation.` : '';
@@ -731,30 +551,6 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
             {
               type: 'text',
               text: `Found ${scoredChapters.length} relevant principles for "${query}":${contextNote}\n\n${results}`,
-            },
-          ],
-        };
-      }
-
-      case 'get_daily_wisdom': {
-        const { date } = GetDailyWisdomSchema.parse(args);
-        const targetDate = date ? new Date(date) : new Date();
-        
-        // Use day of year to select chapter (1-365 maps to 1-81 with cycling)
-        const dayOfYear = Math.floor((targetDate.getTime() - new Date(targetDate.getFullYear(), 0, 0).getTime()) / (1000 * 60 * 60 * 24));
-        const chapterNumber = ((dayOfYear - 1) % 81) + 1;
-        
-        const chapterData = wayOfCodeData.chapters.find(c => c.number === chapterNumber);
-        
-        if (!chapterData) {
-          throw new Error('Unable to find daily wisdom chapter.');
-        }
-
-        return {
-          content: [
-            {
-              type: 'text',
-              text: `**Daily Wisdom - ${targetDate.toDateString()}**\n\n**Chapter ${chapterData.number}**\n\n${chapterData.text}\n\n**Today's Coding Reflection:**\n${chapterData.codingApplication}`,
             },
           ],
         };
@@ -777,11 +573,11 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
           debugging: ['problems', 'thinking', 'clarity', 'observation'],
           refactoring: ['yielding', 'flexible', 'adaptation', 'change'],
           architecture: ['emptiness', 'space', 'structure', 'foundation'],
-          collaboration: ['leadership', 'team', 'trust', 'service'],
-          leadership: ['leadership', 'trust', 'humility', 'service']
+          collaboration: ['team', 'leadership', 'trust', 'harmony'],
+          leadership: ['leadership', 'trust', 'team', 'service']
         };
 
-        const keywords = topicKeywords[topic] || [topic];
+        const keywords = topicKeywords[topic] || [];
         const relevantChapters = wayOfCodeData.chapters.filter(chapter => {
           return keywords.some(keyword => 
             chapter.keywords.includes(keyword) || 
@@ -825,39 +621,6 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
             {
               type: 'text',
               text: `**The Five Core Principles of The Way of Code:**\n\n${principleText}\n\n*These principles form the foundation of vibe coding - a approach that emphasizes harmony, naturalness, and sustainable development practices.*`,
-            },
-          ],
-        };
-      }
-
-      case 'find_wisdom_by_keyword': {
-        const { keyword, limit = 5 } = FindWisdomByKeywordSchema.parse(args);
-        
-        const matchingChapters = wayOfCodeData.chapters.filter(chapter => {
-          const searchText = `${chapter.text} ${chapter.codingApplication} ${chapter.keywords.join(' ')}`.toLowerCase();
-          return searchText.includes(keyword.toLowerCase());
-        }).slice(0, limit);
-
-        if (matchingChapters.length === 0) {
-          return {
-            content: [
-              {
-                type: 'text',
-                text: `No chapters found containing "${keyword}". Try related terms or browse the keyword index.`,
-              },
-            ],
-          };
-        }
-
-        const results = matchingChapters.map(chapter => 
-          `**Chapter ${chapter.number}**\n${chapter.text}\n\n*Application:* ${chapter.codingApplication}\n*Keywords:* ${chapter.keywords.join(', ')}`
-        ).join('\n\n---\n\n');
-
-        return {
-          content: [
-            {
-              type: 'text',
-              text: `Found ${matchingChapters.length} chapters containing "${keyword}":\n\n${results}`,
             },
           ],
         };

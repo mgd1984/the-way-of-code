@@ -26,11 +26,7 @@
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
-      {
-        "command": "wayOfCode.getDailyWisdom",
-        "title": "Get Daily Wisdom",
-        "category": "Way of Code"
-      },
+
       {
         "command": "wayOfCode.searchPrinciples",
         "title": "Search Principles",
@@ -49,7 +45,7 @@
     ],
     "keybindings": [
       {
-        "command": "wayOfCode.getDailyWisdom",
+        "command": "wayOfCode.searchPrinciples",
         "key": "ctrl+shift+w",
         "mac": "cmd+shift+w"
       }
@@ -57,11 +53,7 @@
     "configuration": {
       "title": "The Way of Code",
       "properties": {
-        "wayOfCode.showDailyWisdomOnStartup": {
-          "type": "boolean",
-          "default": true,
-          "description": "Show daily wisdom when VS Code starts"
-        },
+
         "wayOfCode.enableStatusBarWisdom": {
           "type": "boolean",
           "default": true,

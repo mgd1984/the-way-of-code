@@ -14,7 +14,7 @@ NC='\033[0m'
 
 # Configuration
 REPO_URL="https://raw.githubusercontent.com/mgd1984/the-way-of-code/main"
-MCP_PACKAGE="@the-way-of-code/mcp-server"
+MCP_PACKAGE="the-way-of-code"
 
 echo -e "${BLUE}"
 echo "🌊 The Way of Code - Installation"
@@ -38,7 +38,7 @@ install_cursor_rules() {
         cp .cursorrules .cursorrules.backup
     fi
     
-    curl -s "$REPO_URL/cursor-rules/.cursorrules" > .cursorrules
+    curl -s "$REPO_URL/.cursor/rules/core-philosophy.mdc" > .cursorrules
     echo -e "${GREEN}✅ Cursor rules installed!${NC}"
     echo -e "${YELLOW}💡 Restart Cursor to apply the new rules.${NC}"
 }
@@ -77,17 +77,7 @@ install_git_hooks() {
     echo -e "${YELLOW}💡 The Way of Code principles will now appear before each commit.${NC}"
 }
 
-# Function to create daily wisdom script
-install_daily_wisdom() {
-    echo -e "${GREEN}Installing daily wisdom script...${NC}"
-    
-    mkdir -p scripts
-    curl -s "$REPO_URL/scripts/daily-wisdom.js" > scripts/daily-wisdom.js
-    chmod +x scripts/daily-wisdom.js
-    
-    echo -e "${GREEN}✅ Daily wisdom script installed!${NC}"
-    echo -e "${YELLOW}💡 Run: node scripts/daily-wisdom.js${NC}"
-}
+
 
 # Function to create project documentation
 create_project_docs() {
@@ -117,8 +107,8 @@ This project follows The Way of Code principles for vibe-coding.
 ## Resources
 
 - [Full Text](https://github.com/mgd1984/the-way-of-code)
-- [Core Principles](https://github.com/mgd1984/the-way-of-code/blob/main/principles/core-principles.md)
-- [Daily Wisdom](./scripts/daily-wisdom.js)
+- [Complete Text](https://github.com/mgd1984/the-way-of-code/blob/main/text/complete.md)
+
 
 ---
 
@@ -137,9 +127,9 @@ show_menu() {
     echo "2) Cursor rules only"
     echo "3) MCP server only"
     echo "4) Git hooks only"
-    echo "5) Daily wisdom script only"
-    echo "6) Project documentation only"
-    echo "7) Custom selection"
+
+    echo "5) Project documentation only"
+    echo "6) Custom selection"
     echo "0) Exit"
     echo ""
     read -p "Enter your choice [1]: " choice
@@ -161,8 +151,7 @@ custom_selection() {
     read -p "Install git hooks? [y]: " install_hooks
     install_hooks=${install_hooks:-y}
     
-    read -p "Install daily wisdom script? [y]: " install_wisdom
-    install_wisdom=${install_wisdom:-y}
+    
     
     read -p "Create project documentation? [y]: " create_docs
     create_docs=${create_docs:-y}
@@ -172,7 +161,7 @@ custom_selection() {
     [[ $install_cursor == "y" ]] && install_cursor_rules
     [[ $install_mcp == "y" ]] && install_mcp_server
     [[ $install_hooks == "y" ]] && install_git_hooks
-    [[ $install_wisdom == "y" ]] && install_daily_wisdom
+
     [[ $create_docs == "y" ]] && create_project_docs
 }
 
@@ -185,7 +174,6 @@ case $choice in
         install_cursor_rules
         install_mcp_server
         install_git_hooks
-        install_daily_wisdom
         create_project_docs
         ;;
     2)
@@ -198,12 +186,10 @@ case $choice in
         install_git_hooks
         ;;
     5)
-        install_daily_wisdom
-        ;;
-    6)
         create_project_docs
         ;;
-    7)
+
+    6)
         custom_selection
         ;;
     0)
@@ -222,7 +208,7 @@ echo -e "${GREEN}The Way of Code is now integrated into your development environ
 echo ""
 echo -e "${YELLOW}Next steps:${NC}"
 echo "• Restart your IDE to apply new configurations"
-echo "• Run: node scripts/daily-wisdom.js for today's wisdom"
+
 echo "• Commit some code to see the git hooks in action"
 echo "• Visit: https://github.com/mgd1984/the-way-of-code for more resources"
 echo ""
