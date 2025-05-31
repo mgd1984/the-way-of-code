@@ -3,12 +3,6 @@
       "the-way-of-code": {
         "command": "npx",
         "args": ["the-way-of-code"]
-      },
-      "gitmcp-way-of-code": {
-        "url": "https://gitmcp.io/mgd1984/the-way-of-code"
-      },
-      "gitmcp-docs": {
-        "url": "https://gitmcp.io/docs"
       }
     }
   }

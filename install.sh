@@ -13,7 +13,7 @@ RED='\033[0;31m'
 NC='\033[0m'
 
 # Configuration
-REPO_URL="https://raw.githubusercontent.com/[username]/the-way-of-code/main"
+REPO_URL="https://raw.githubusercontent.com/mgd1984/the-way-of-code/main"
 MCP_PACKAGE="@the-way-of-code/mcp-server"
 
 echo -e "${BLUE}"
@@ -116,8 +116,8 @@ This project follows The Way of Code principles for vibe-coding.
 
 ## Resources
 
-- [Full Text](https://github.com/[username]/the-way-of-code)
-- [Core Principles](https://github.com/[username]/the-way-of-code/blob/main/principles/core-principles.md)
+- [Full Text](https://github.com/mgd1984/the-way-of-code)
+- [Core Principles](https://github.com/mgd1984/the-way-of-code/blob/main/principles/core-principles.md)
 - [Daily Wisdom](./scripts/daily-wisdom.js)
 
 ---
@@ -224,6 +224,6 @@ echo -e "${YELLOW}Next steps:${NC}"
 echo "• Restart your IDE to apply new configurations"
 echo "• Run: node scripts/daily-wisdom.js for today's wisdom"
 echo "• Commit some code to see the git hooks in action"
-echo "• Visit: https://github.com/[username]/the-way-of-code for more resources"
+echo "• Visit: https://github.com/mgd1984/the-way-of-code for more resources"
 echo ""
 echo -e "${BLUE}May your code flow like water. 🌊${NC}" 

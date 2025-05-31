@@ -72,7 +72,7 @@ function formatWisdom(chapterNum, format = 'plain') {
             elements: [
               {
                 type: "mrkdwn",
-                text: "From <https://github.com/[username]/the-way-of-code|The Way of Code> • Vibe coding for AI-driven development"
+                text: "From <https://github.com/mgd1984/the-way-of-code|The Way of Code> • Vibe coding for AI-driven development"
               }
             ]
           }
@@ -111,7 +111,7 @@ function formatWisdom(chapterNum, format = 'plain') {
 ${wisdom.application}
 
 ---
-*From [The Way of Code](https://github.com/[username]/the-way-of-code) • Vibe coding for AI-driven development*`;
+*From [The Way of Code](https://github.com/mgd1984/the-way-of-code) • Vibe coding for AI-driven development*`;
 
     default:
       return `🌊 Daily Wisdom from The Way of Code
@@ -122,7 +122,7 @@ Chapter ${wisdom.chapter}:
 Today's Coding Practice:
 ${wisdom.application}
 
-From The Way of Code: https://github.com/[username]/the-way-of-code`;
+From The Way of Code: https://github.com/mgd1984/the-way-of-code`;
   }
 }
 

@@ -80,7 +80,7 @@ npm install -g @the-way-of-code/mcp-server
 ### For Any AI Assistant
 Simply reference this repository in your prompts:
 ```
-Please code following The Way of Code principles from: https://github.com/[username]/the-way-of-code
+Please code following The Way of Code principles from: https://github.com/mgd1984/the-way-of-code
 ```
 
 ## 🚀 MCP Server

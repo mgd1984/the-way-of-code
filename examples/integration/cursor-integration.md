@@ -35,7 +35,7 @@ For a React project, you might add:
 - "Are we forcing complexity where simplicity would serve?"
 - "Does this code flow like water?"
 
-Reference: https://github.com/[username]/the-way-of-code/blob/main/principles/core-principles.md
+Reference: https://github.com/mgd1984/the-way-of-code/blob/main/principles/core-principles.md
 ```
 
 ## Advanced Integration
@@ -79,14 +79,14 @@ Add this to your daily workflow:
 
 ```bash
 # Add to your shell profile
-alias daily-wisdom="curl -s https://raw.githubusercontent.com/[username]/the-way-of-code/main/daily/$(date +%j).md"
+alias daily-wisdom="curl -s https://raw.githubusercontent.com/mgd1984/the-way-of-code/main/daily/$(date +%j).md"
 
 # Or create a simple script
 echo "#!/bin/bash
 day_of_year=\$(date +%j)
 chapter=\$((\$day_of_year % 81 + 1))
 echo \"Today's Wisdom - Chapter \$chapter\"
-curl -s \"https://raw.githubusercontent.com/[username]/the-way-of-code/main/text/chapter-\$chapter.md\"
+curl -s \"https://raw.githubusercontent.com/mgd1984/the-way-of-code/main/text/chapter-\$chapter.md\"
 " > ~/bin/way-of-code-daily
 chmod +x ~/bin/way-of-code-daily
 ```
@@ -128,7 +128,7 @@ We are Vibe Coders. We follow The Way of Code in all our development practices.
 - Celebrate elegant solutions without ego
 - Share knowledge freely
 
-Reference: https://github.com/[username]/the-way-of-code
+Reference: https://github.com/mgd1984/the-way-of-code
 ```
 
 ### 7. Git Hooks Integration

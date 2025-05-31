@@ -105,12 +105,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/[username]/the-way-of-code.git",
+    "url": "https://github.com/mgd1984/the-way-of-code.git",
     "directory": "vscode-extension"
   },
-  "homepage": "https://github.com/[username]/the-way-of-code#readme",
+  "homepage": "https://github.com/mgd1984/the-way-of-code#readme",
   "bugs": {
-    "url": "https://github.com/[username]/the-way-of-code/issues"
+    "url": "https://github.com/mgd1984/the-way-of-code/issues"
   },
   "license": "MIT"
 } 
