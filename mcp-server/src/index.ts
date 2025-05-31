@@ -46,17 +46,48 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
     {
       name: 'get_chapter',
       description: 'Get a specific chapter (1-81)',
-      inputSchema: GetChapterSchema.schema
+      inputSchema: {
+        type: 'object',
+        properties: {
+          chapter: {
+            type: 'number',
+            minimum: 1,
+            maximum: 81,
+            description: 'Chapter number (1-81)'
+          }
+        },
+        required: ['chapter']
+      }
     },
     {
       name: 'search_principles',
       description: 'Search for relevant principles',
-      inputSchema: SearchSchema.schema
+      inputSchema: {
+        type: 'object',
+        properties: {
+          query: {
+            type: 'string',
+            description: 'Search query for relevant principles'
+          },
+          limit: {
+            type: 'number',
+            minimum: 1,
+            maximum: 10,
+            default: 5,
+            description: 'Maximum number of results to return'
+          }
+        },
+        required: ['query']
+      }
     },
     {
       name: 'get_core_principles',
       description: 'Get the five core principles',
-      inputSchema: z.object({}).schema
+      inputSchema: {
+        type: 'object',
+        properties: {},
+        required: []
+      }
     }
   ]
 }));
@@ -64,24 +95,24 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
 server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest) => {
   const { name, arguments: args } = request.params;
 
-  switch (name) {
-    case 'get_chapter': {
-      const { chapter } = GetChapterSchema.parse(args);
-      const chapterData = wayOfCodeData.chapters.find(c => c.number === chapter);
-      
-      if (!chapterData) {
+    switch (name) {
+      case 'get_chapter': {
+        const { chapter } = GetChapterSchema.parse(args);
+        const chapterData = wayOfCodeData.chapters.find(c => c.number === chapter);
+        
+        if (!chapterData) {
         throw new Error(`Chapter ${chapter} not found`);
-      }
+        }
 
-              return {
+        return {
           content: [{
-            type: 'text',
+              type: 'text',
             text: `# Chapter ${chapterData.number}\n\n${chapterData.text}`
           }]
         };
-    }
+      }
 
-    case 'search_principles': {
+      case 'search_principles': {
       const { query, limit } = SearchSchema.parse(args);
       
       const results = wayOfCodeData.chapters
@@ -91,28 +122,28 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
         .slice(0, limit)
         .map(chapter => `**Chapter ${chapter.number}**\n${chapter.text.slice(0, 200)}...`);
 
-      return {
+        return {
         content: [{
-          type: 'text',
+              type: 'text',
           text: results.length > 0 
             ? `Found ${results.length} relevant principles:\n\n${results.join('\n\n')}`
             : 'No relevant principles found. Try a different search term.'
         }]
-      };
-    }
+        };
+      }
 
-    case 'get_core_principles': {
-      return {
+      case 'get_core_principles': {
+        return {
         content: [{
-          type: 'text',
+              type: 'text',
           text: `# The Five Core Principles\n\n${CORE_PRINCIPLES.map((p, i) => `${i + 1}. **${p}**`).join('\n')}\n\nThese principles guide all coding decisions and practices.`
         }]
-      };
-    }
+        };
+      }
 
-    default:
-      throw new Error(`Unknown tool: ${name}`);
-  }
+      default:
+        throw new Error(`Unknown tool: ${name}`);
+    }
 });
 
 // Resources
@@ -145,8 +176,8 @@ server.setRequestHandler(ReadResourceRequestSchema, async (request: ReadResource
 
 // Start server
 async function main() {
-  const transport = new StdioServerTransport();
-  await server.connect(transport);
+    const transport = new StdioServerTransport();
+    await server.connect(transport);
 }
 
 main().catch(console.error); 
