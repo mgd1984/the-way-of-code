@@ -1,5 +1,5 @@
 ---
-description: 
+description: Release process with purposeful flow
 globs: 
 alwaysApply: false
 ---
@@ -8,74 +8,29 @@ alwaysApply: false
 *"When the work is done, let it go. Complete without attachment."* - Chapter 17
 
 ## Release Philosophy
+Balance between new features and stability. Clear purpose behind each version bump. Neither rushing nor holding back unnecessarily.
 
-Each release should embody **Balance Over Extremes**:
-- Neither rushing toward premature release nor holding back unnecessarily
-- Balanced between new features and stability
-- Clear purpose and intention behind each version bump
+## Semantic Versioning
+- **Patch (x.x.1)**: Bug fixes, refinements
+- **Minor (x.1.x)**: New features, enhancements  
+- **Major (1.x.x)**: Breaking changes, architectural evolution
 
-## Semantic Versioning Harmony
+## Release Process
+1. **Preparation** - Review changes, update versions, test completely
+2. **Commit** - Craft meaningful messages, stage atomically
+3. **GitHub Release** - Tell the story of evolution with context
+4. **NPM Publication** - Verify, test, monitor
 
-Follow semantic versioning with mindful intention:
-- **Patch (x.x.1)**: Bug fixes, refinements, asset organization
-- **Minor (x.1.x)**: New features, enhanced capabilities, documentation improvements
-- **Major (1.x.x)**: Breaking changes, philosophical shifts, architectural evolution
-
-## Release Process Flow
-
-### 1. **Preparation with Presence**
-- Review all changes mindfully
-- Update version numbers across all relevant files
-- Ensure documentation reflects current state
-- Test MCP server functionality completely
-
-### 2. **Commit with Intention**
-- Craft commit messages that reflect the essence of changes
-- Use conventional commit format with Way of Code spirit
-- Stage all related changes together for atomic commits
-
-### 3. **GitHub Release Creation**
-- Write release notes that tell the story of evolution
-- Include both technical details and philosophical context
-- Reference relevant chapters from The Way of Code
-- Provide clear upgrade instructions
-
-### 4. **NPM Publication**
-- Verify package.json reflects new version
-- Ensure all files are properly included
-- Test installation from NPM registry
-- Monitor for any deployment issues
-
-## Release Note Wisdom
-
-Structure release notes following natural flow:
-1. **Opening** - Brief philosophical context
-2. **Evolution** - What has grown and changed
-3. **Technical Details** - Specific improvements
-4. **Integration** - How this affects users
-5. **Gratitude** - Acknowledgment of the journey
-
-## Version Naming
-
-Choose versions that reflect the nature of changes:
-- Emergency fixes: immediate patch releases
-- Feature completion: minor version bumps
-- Architectural refinement: consider minor or major
-- Breaking changes: always major version increase
-
-## Continuous Refinement
-
-- "The master carves his block, slowly but surely"
-- Each release is both completion and beginning
-- Version numbers are milestones, not destinations
-- Progress flows naturally from intention and practice
+## Release Note Structure
+1. Opening - Brief philosophical context
+2. Evolution - What has grown and changed
+3. Technical Details - Specific improvements
+4. Integration - How this affects users
+5. Gratitude - Acknowledgment of the journey
 
 ## Files to Update
-
-Maintain consistency across:
 - `mcp-server/package.json` - Primary version source
 - `mcp-server/src/index.ts` - Server version declaration
 - Release notes and documentation
-- Any version references in README files
 
-*"Do by not doing, and there is nothing that cannot be done"* - Chapter 37
+*"Each release is both completion and beginning"*

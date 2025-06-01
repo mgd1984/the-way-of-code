@@ -1,0 +1,39 @@
+---
+description: 
+globs: **/*.ts,**/*.tsx,**/*.js,**/*.mjs,**/*.sh,**/*.bash,scripts/**/*,git-hooks/**/*
+alwaysApply: false
+---
+
+# Languages - The Way of Code
+
+## TypeScript/JavaScript Harmony
+- Write code that reads like natural language
+- Prefer explicit over implicit when it aids understanding  
+- Let TypeScript infer types when obvious, be explicit when helpful
+- Keep functions small, focused on single responsibilities
+
+### Type Design (TypeScript)
+- Simple, clear type definitions over complex onesxw
+- Union types and discriminated unions for clarity
+- Types that express intent, not just structure
+- Use Zod for runtime validation at boundaries
+
+### Error Handling
+- Handle errors gracefully with clear messages
+- Use Result types or proper error boundaries
+- Validate inputs at module boundaries
+- Fail fast when appropriate, recover gracefully when possible
+
+### Module Organization
+- Export only what needs to be public
+- Keep related functionality together
+- Organize by feature, not by technical layer
+- Use consistent naming conventions
+
+## Shell Scripts
+- Use `set -euo pipefail` for safety
+- Quote variables, check dependencies first
+- Provide clear feedback and helpful error messages
+- Make scripts idempotent when possible
+
+*"The soft overcomes the hard"* - Gentle code beats aggressive complexity

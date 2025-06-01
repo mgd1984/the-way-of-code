@@ -1,0 +1,53 @@
+---
+description: 
+globs: mcp-server/**/*,**/package.json,**/tsconfig.json,**/*.config.js,**/*.config.ts
+alwaysApply: false
+---
+
+# Development - The Way of Code
+
+## Before Coding
+- Understand the true nature of the problem
+- Consider the simplest approach that works
+- Ask: "What is the essence of what I'm trying to achieve?"
+
+## While Coding  
+- Notice when you're forcing vs. flowing
+- Pause when complexity feels overwhelming
+- Trust your intuition about code quality
+- Refactor continuously toward simplicity
+
+## MCP Server Architecture
+- Follow Model Context Protocol specifications exactly
+- Keep tool implementations simple and focused
+- Each tool should have a single, clear purpose
+- Validate inputs using Zod schemas for type safety
+
+### Tool Design Pattern
+```typescript
+const ToolSchema = z.object({
+  param: z.string().min(1, "Helpful error message")
+});
+
+try {
+  const { param } = ToolSchema.parse(args);
+  const result = processSimply(param);
+  return formatResponse(result);
+} catch (error) {
+  return gentleErrorResponse(error);
+}
+```
+
+## Configuration Harmony
+- Keep dependencies minimal and purposeful
+- Use exact versions for critical dependencies  
+- Make configuration simple and readable
+- Document any non-obvious choices
+
+### Package.json Philosophy
+- Organize dependencies logically
+- Make script names intuitive
+- Include helpful scripts for common tasks
+- Version lock critical dependencies
+
+*"The power of your code lies not just in what it does, but in what it doesn't do"*

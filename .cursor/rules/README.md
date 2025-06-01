@@ -1,70 +1,53 @@
 # Cursor Rules - The Way of Code
 
-This directory contains project rules following Cursor's modern MDC format, embodying the principle of **Balance Over Extremes** - neither too rigid nor too loose.
+*"True perfection seems imperfect, yet it is perfectly itself"* - Chapter 45
 
-## Rule Structure
+These rules embody **Balance Over Extremes** - rich wisdom distilled to essential guidance.
 
-### Always Applied Rules
-- `core-philosophy.mdc` - The five pillars and essential wisdom (always active)
+## Philosophy of Rules
 
-### Auto-Attached Rules (by file pattern)
-- `typescript.mdc` - TypeScript guidelines
-  - **Patterns**: `**/*.ts`, `**/*.tsx`
-- `javascript.mdc` - JavaScript guidelines  
-  - **Patterns**: `**/*.js`, `**/*.mjs`, `scripts/**/*`
-- `mcp-server.mdc` - MCP server development
-  - **Patterns**: `mcp-server/**/*`
-- `documentation.mdc` - Documentation guidelines
-  - **Patterns**: `**/*.md`, `**/*.txt`, `text/**/*`, `examples/**/*`, `principles/**/*`
-- `shell-scripts.mdc` - Shell script guidelines
-  - **Patterns**: `**/*.sh`, `**/*.bash`, `install.sh`, `git-hooks/**/*`
-- `package-json.mdc` - Project configuration
-  - **Patterns**: `**/package.json`, `**/tsconfig.json`, `**/*.config.js`, `**/*.config.ts`
+The Way of Code rules are not restrictions but **philosophical APIs** - elegant abstractions that make ancient wisdom accessible to modern development. They guide without constraining, teach without preaching, and evolve through practice.
 
-### Manual Rules (invoke with @rule-name)
-- `coding-practices.mdc` - Detailed coding guidelines
-- `collaboration.mdc` - Code review and team practices  
-- `mcp-tool-template.mdc` - Template for new MCP tools
-- `gitmcp-integration.mdc` - GitMCP.io integration guidelines
-- `releases.mdc` - Release and versioning process
-- `meta-rules.mdc` - Guidelines for evolving the rules themselves
+## Core Rules (Always Applied)
+- `core-philosophy.mdc` - The five pillars: our eternal foundation
+- `meta-rules.mdc` - How rules themselves follow The Way
 
-### Nested Rules
-- `mcp-server/.cursor/rules/server-specific.mdc` - Server-specific guidelines (auto-applies in mcp-server directory)
+## Auto-Applied Rules (by file pattern)
+- `languages.mdc` - TypeScript/JavaScript/Shell mastery through ancient wisdom
+- `development.mdc` - Coding practices rooted in timeless principles
+- `documentation.mdc` - Writing that serves understanding over ego
 
-## File Pattern Coverage
+## Manual Rules (invoke with @rule-name)
+- `collaboration.mdc` - Code review and team harmony
+- `gitmcp-integration.mdc` - GitMCP.io integration wisdom
+- `releases.mdc` - Release process with purposeful flow
 
-| File Type | Pattern | Rule Applied |
-|-----------|---------|--------------|
-| TypeScript | `**/*.ts`, `**/*.tsx` | `typescript.mdc` |
-| JavaScript | `**/*.js`, `**/*.mjs` | `javascript.mdc` |
-| Scripts | `scripts/**/*`, `**/*.sh` | `javascript.mdc`, `shell-scripts.mdc` |
-| Documentation | `**/*.md`, `text/**/*`, `examples/**/*` | `documentation.mdc` |
-| Configuration | `**/package.json`, `**/tsconfig.json` | `package-json.mdc` |
-| MCP Server | `mcp-server/**/*` | `mcp-server.mdc` + nested rule |
-| Git Hooks | `git-hooks/**/*` | `shell-scripts.mdc` |
-| Assets | `docs/assets/**/*` | `documentation.mdc` |
+## Philosophical Architecture
 
-## Usage Philosophy
+### File Pattern Coverage
+| Domain | Pattern | Rule Applied | Chapter Wisdom |
+|--------|---------|--------------|----------------|
+| All Languages | `**/*.{ts,tsx,js,mjs,sh,bash}` | `languages.mdc` | "Truthful words are not beautiful" |
+| Development | `mcp-server/**/*`, configs | `development.mdc` | "The master carves his block, slowly" |
+| Documentation | `**/*.md`, `text/**/*`, examples | `documentation.mdc` | "True fullness seems empty" |
 
-- Core philosophy flows through all interactions
-- File-specific rules auto-attach naturally
-- Use `@rule-name` to invoke specific guidance manually
-- Nested rules provide context-aware wisdom
+### The Trinity of Guidance
+- **What is** - Eternal principles that never change
+- **How to** - Practical applications that adapt to context  
+- **Why** - Understanding that connects ancient wisdom to modern needs
 
-## Evolution and Refinement
+## Usage as Practice
 
-These rules embody the principle of eternal refinement:
-- "The master carves his block, slowly but surely"
-- Each update moves toward greater clarity and usefulness
-- Rules evolve with the project while maintaining philosophical foundation
-- Balance between guidance and freedom
+### Natural Integration
+- Core philosophy flows through all interactions like water
+- File-specific rules auto-attach when relevant context appears
+- Manual rules (`@rule-name`) provide deeper guidance on demand
+- Rules evolve through use while maintaining essential truth
 
-## Recent Enhancements
+### The Path of Continuous Refinement
+- Rules simplify through abstraction, not reduction
+- Each iteration reveals clearer expression of timeless principles
+- Complexity serves understanding, never programmer ego
+- Evolution follows the middle path - neither adding nor removing unnecessarily
 
-- Enhanced core philosophy with MCP integration wisdom
-- Added releases rule for versioning process
-- Updated documentation rule for asset organization
-- Refined GitMCP integration guidance
-
-*"True perfection seems imperfect, yet it is perfectly itself"* - Chapter 45 
+*"The Tao that can be spoken is not the eternal Tao"* - These rules point toward wisdom; practice reveals the way. 
