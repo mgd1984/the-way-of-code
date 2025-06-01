@@ -174,10 +174,21 @@ server.setRequestHandler(ReadResourceRequestSchema, async (request: ReadResource
   throw new Error(`Unknown resource: ${uri}`);
 });
 
-// Start server
+// Start server or provide wisdom
 async function main() {
-    const transport = new StdioServerTransport();
-    await server.connect(transport);
+  // If run directly (not as MCP server), provide daily wisdom
+  if (process.argv.length > 2 || process.stdin.isTTY) {
+    const randomChapter = wayOfCodeData.chapters[Math.floor(Math.random() * wayOfCodeData.chapters.length)];
+    console.log(`Chapter ${randomChapter.number}\n`);
+    console.log(randomChapter.text);
+    console.log(`\n---`);
+    console.log(`\n"You don't write code. You think in code."`);
+    console.log(`\nRun again when you're stuck. Or integrate as MCP server for your AI assistant.`);
+    return;
+  }
+
+  const transport = new StdioServerTransport();
+  await server.connect(transport);
 }
 
 main().catch(console.error); 

@@ -1,7 +1,7 @@
 {
   "name": "the-way-of-code",
   "version": "1.2.0",
-  "description": "Ancient wisdom for modern systems. MCP server providing Taoist principles for software development.",
+  "description": "Ancient wisdom for modern developers. 81 principles for coding in the age of AI.",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
@@ -19,7 +19,9 @@
     "philosophy",
     "principles",
     "ai",
-    "wisdom"
+    "wisdom",
+    "development",
+    "vibe-coding"
   ],
   "author": "The Way of Code",
   "license": "MIT",

@@ -1,21 +1,74 @@
 # The Way of Code
 
-*Ancient wisdom for the age of AI*
-
-[![GitMCP](https://img.shields.io/endpoint?url=https://gitmcp.io/badge/mgd1984/the-way-of-code)](https://gitmcp.io/mgd1984/the-way-of-code)
-
-> "The code that can be named is not the eternal code."
-
----
-
-## Install
+*You don't write code. You think in code.*
 
 ```bash
 npx the-way-of-code
 ```
 
-## Configure
+---
 
+## What This Actually Is
+
+Ancient Chinese philosophy adapted for developers who work with AI. 81 short chapters of practical wisdom for when your job stopped being about typing and started being about thinking.
+
+No bullshit. No mystical theater. Just useful perspectives on code, creativity, and getting things done in 2025.
+
+---
+
+## The Real Problems
+
+Your relationship with code changed and nobody told you how to deal with it.
+
+**The old way**: Write functions, fix bugs, ship features.  
+**The new way**: Shape ideas, guide AI, think in systems.
+
+**The old question**: "How do I implement this?"  
+**The new question**: "What am I actually trying to solve?"
+
+When GitHub Copilot can write your for-loops, what's left for you? Everything that matters. And nothing you were taught in CS.
+
+---
+
+## Core Principles
+
+**Simplicity over cleverness** — The best code looks obvious after you write it  
+**Flow over force** — Fight the problem, not the tools  
+**Humility over ego** — Your AI pair is often right  
+**Balance over extremes** — Neither luddite nor early adopter  
+**Presence over rushing** — Slow down to go fast  
+
+These aren't rules. They're reminders for when you're stuck.
+
+---
+
+## How It Works
+
+Three functions. That's it.
+
+```typescript
+get_chapter(1..81)        // Get wisdom for your situation
+search_principles(query)  // Find relevant advice  
+get_core_principles()     // Reset to basics
+```
+
+Use it when you're:
+- Stuck on an architectural decision
+- Fighting with your tools instead of solving problems
+- Wondering if you're overthinking something
+- Needing perspective on code review feedback
+- Debugging a problem that shouldn't exist
+
+---
+
+## Integration
+
+### One-line setup
+```bash
+npx the-way-of-code
+```
+
+### As MCP server
 ```json
 {
   "mcpServers": {
@@ -27,93 +80,55 @@ npx the-way-of-code
 }
 ```
 
-## Use
+Your AI assistant becomes a philosophy teacher. Ask it to quote relevant chapters when you're stuck, stressed, or spiraling.
 
-The principles guide the code. The code embodies the principles.
-
----
-
-## Philosophy
-
-### The Five Pillars
-
-**Simplicity** over complexity  
-**Flow** over force  
-**Humility** over ego  
-**Balance** over extremes  
-**Presence** over rushing
-
-### The Practice
-
-Code emerges from silence. Problems dissolve in understanding. Architecture flows from constraints, not abstractions.
-
-The master debugger does not force solutions—they create space for clarity to arise.
-
----
-
-## Implementation
-
-**Tools** — Three focused instruments  
-**Resource** — Complete wisdom
-
-Together, they form a complete system.
-
-```typescript
-// The tools
-get_chapter(chapter: 1..81)
-search_principles(query: string)
-get_core_principles()
-```
-
-No more than necessary. No less than sufficient.
-
----
-
-## Integration
-
-### Instant
+### Zero-install option
 ```
 https://gitmcp.io/mgd1984/the-way-of-code
 ```
 
-### Local
-```bash
-npm install -g the-way-of-code
-```
-
-### Reference
-```
-@github:mgd1984/the-way-of-code
-```
-
-Choose your path. All paths lead to the same source.
-
 ---
 
-## The Text
+## The Source Material
 
-**[THE_WAY_OF_CODE.md](./THE_WAY_OF_CODE.md)** — Complete wisdom, 81 chapters
+**[THE_WAY_OF_CODE.md](./THE_WAY_OF_CODE.md)** — All 81 chapters
 
-The source adapts to every container while remaining unchanged.
+Based on the Tao Te Ching but adapted by Rick Rubin for modern development. Each chapter is a short reflection on code, creativity, and craft.
+
+Read one when you're stuck. Read another when that one doesn't help. Eventually something will click.
 
 ---
 
 ## Examples
 
-**[examples.md](./examples.md)** — Essential templates
+**[examples.md](./examples.md)** — Practical applications
 
-The way is shown, not explained.
+How to actually use this stuff:
+- Code review that doesn't crush souls
+- Debugging without losing your mind  
+- Architecture decisions that don't suck
+- Working with AI without becoming redundant
 
 ---
 
 ## Contributing
 
-Approach with beginner's mind.  
-Question before asserting.  
-Serve the code, not the ego.
+This is open source philosophy. Fork it, adapt it, make it better.
 
-*"Do by not doing, and there is nothing that cannot be done."*
+The best contributions feel like they were always supposed to be there.
 
 ---
 
-*Based on the Tao Te Ching by Lao Tzu, adapted by Rick Rubin for modern development* 
+## Why This Matters
+
+Software development in 2025 is as much about philosophical clarity as technical skill. 
+
+When AI can generate code faster than you can think, your value isn't in your typing speed. It's in your judgment, taste, and ability to see the shape of problems before they become crises.
+
+This collection helps you develop that judgment.
+
+---
+
+*"There is no spoon. Only the merge conflict."*
+
+*Based on the Tao Te Ching by Lao Tzu, adapted by Rick Rubin* 
