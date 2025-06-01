@@ -22,6 +22,7 @@ import { wayOfCodeData } from './data/way-of-code.js';
 // Input validation schemas - simple and focused
 const GetChapterSchema = z.object({
   chapter: z.number().min(1).max(81),
+  profane: z.boolean().optional().default(false),
 });
 
 const SearchWisdomSchema = z.object({
@@ -404,6 +405,11 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
               description: 'Chapter number (1-81)',
               minimum: 1,
               maximum: 81
+            },
+            profane: {
+              type: 'boolean',
+              description: 'Return the profane version if available (default: false)',
+              default: false
             }
           },
           required: ['chapter']
@@ -487,18 +493,29 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
   try {
     switch (name) {
       case 'get_chapter': {
-        const { chapter } = GetChapterSchema.parse(args);
+        const { chapter, profane } = GetChapterSchema.parse(args);
         const chapterData = wayOfCodeData.chapters.find(c => c.number === chapter);
         
         if (!chapterData) {
           throw new Error(`Chapter ${chapter} not found. Please use a number between 1 and 81.`);
         }
 
+        // Use profane version if requested and available, otherwise use original
+        const chapterText = profane && chapterData.profaneVersion ? 
+          chapterData.profaneVersion : 
+          chapterData.text;
+
+        const versionNote = profane && chapterData.profaneVersion ? 
+          " (Profane Version)" : 
+          profane && !chapterData.profaneVersion ? 
+          " (Profane version not available for this chapter)" : 
+          "";
+
         return {
           content: [
             {
               type: 'text',
-              text: `**Chapter ${chapterData.number}**\n\n${chapterData.text}\n\n**Coding Application:**\n${chapterData.codingApplication}\n\n**Keywords:** ${chapterData.keywords.join(', ')}`,
+              text: `**Chapter ${chapterData.number}${versionNote}**\n\n${chapterText}\n\n**Coding Application:**\n${chapterData.codingApplication}\n\n**Keywords:** ${chapterData.keywords.join(', ')}`,
             },
           ],
         };
