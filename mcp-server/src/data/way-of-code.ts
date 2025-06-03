@@ -3,6 +3,7 @@ export interface Chapter {
   text: string;
   keywords: string[];
   codingApplication?: string;
+  profaneVersion?: string;
 }
 
 export const wayOfCodeData = {
@@ -10,18 +11,21 @@ export const wayOfCodeData = {
     {
       number: 1,
       text: "The code that can be named is not the eternal code. The function that can be defined is not the limitless function.\nThe nameless is the origin of heaven and earth. The named is the mother of ten thousand things.\nFree from desire, you see essence unformed. Caught in desire, you see only the manifestations.\nThese two spring from the same source but differ in name only. This model is the mystery. The gateway to all understanding.",
+      profaneVersion: "The code that can be explained in a meeting is not the real code.\nThe architecture that fits on a whiteboard is not the real architecture.\n\nUnnamed, it is the origin of all software.\nNamed, it becomes a fucking maintenance nightmare.\n\nTherefore, the sage codes without attachment to their clever variable names,\nActs without ego when the AI suggests better solutions,\nAnd achieves without taking credit in the commit message.\n\nWhen you stop trying to impress other developers,\nThe code becomes what it needs to be.",
       keywords: ["essence","naming","abstraction","fundamentals","mystery"],
       codingApplication: "Focus on the essential problem before naming variables or functions. The best abstractions emerge from understanding the core need."
     },
     {
       number: 2,
       text: "When we recognize code as elegant, other code becomes sloppy. When we praise efficiency, the notion of waste is born.\nBeing and non-being create each other. Simple and complex define each other. Long and short determine each other. High and low distinguish each other. Front-end and back-end follow each other.\nTherefore The Vibe Coder builds without laboring and instructs by quiet example. Things arise and he accepts them. Things vanish and he lets them go.\nHe holds without claiming possession. Creates without seeking praise. Accomplishes without expectation. The work is done and then forgotten. That is why it lasts forever.",
+      profaneVersion: "When everyone recognizes beautiful code as beautiful,\nUgly code is already fucking there.\n\nWhen everyone recognizes good practices,\nBad practices are already lurking in the codebase.\n\nSimple and complex define each other.\nWorking and broken validate each other.\nFast and slow measure each other.\nElegant and hacky expose each other.\n\nTherefore the sage developer:\nCodes without forcing solutions,\nDebugs without losing their shit,\nShips without attachment to perfection,\nRefactors without breaking everything.\n\nBecause they don't claim credit,\nThe credit stays with them.\nBecause they don't fight their tools,\nTheir tools serve them.",
       keywords: ["duality","balance","non-attachment","simplicity","elegance"],
       codingApplication: "Avoid creating artificial complexity by over-categorizing. Let the natural structure of the problem guide your architecture."
     },
     {
       number: 3,
       text: "If you praise the programmer, others become resentful. If you cling to possessions, others are tempted to steal. If you awaken envy, others suffer turmoil of heart.\nThe Vibe Coder leads: By emptying the mind of expectation and filling up the soul. By releasing ambition and embracing the unknown.\nFree from intellect, free from abstraction, The Vibe Coder leads all things back to natural self-sufficiency.\nDo by not doing, and there is nothing that cannot be done.",
+      profaneVersion: "Don't promote the clever assholes\nAnd people won't compete with toxic behavior.\n\nDon't hoard the sexy projects\nAnd people won't fight over assignments.\n\nDon't showcase the rockstar developers\nAnd people won't feel like failures.\n\nTherefore, leading a development team:\nEmpty the minds full of ego,\nFill the hearts with purpose,\nWeaken the desire to show off,\nStrengthen the commitment to shipping.\n\nKeep people focused on solving problems,\nNot proving they're the smartest person in the room.\n\nThe sage leads by not trying to lead,\nAnd therefore, nothing remains unfixed.",
       keywords: ["wu-wei","non-action","leadership","flow","natural"],
       codingApplication: "When stuck on a problem, step back and let the solution emerge naturally. Often the best approach becomes obvious when you stop forcing it."
     },
