@@ -2,6 +2,8 @@
 
 *Ancient wisdom for the age of AI*
 
+[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=the-way-of-code&config=eyJjb21tYW5kIjoibnB4IHRoZS13YXktb2YtY29kZSJ9)
+
 [![GitMCP](https://img.shields.io/endpoint?url=https://gitmcp.io/badge/mgd1984/the-way-of-code)](https://gitmcp.io/mgd1984/the-way-of-code)
 
 > "The code that can be named is not the eternal code."
