@@ -1,6 +1,6 @@
 {
   "name": "the-way-of-code",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "Ancient wisdom for modern systems. MCP server providing Taoist principles for software development.",
   "type": "module",
   "main": "dist/index.js",

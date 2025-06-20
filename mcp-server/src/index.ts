@@ -18,6 +18,15 @@ import {
 } from '@modelcontextprotocol/sdk/types.js';
 import { z } from 'zod';
 import { wayOfCodeData } from './data/way-of-code.js';
+import { readFileSync } from 'fs';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+// Get package version dynamically
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const packageJson = JSON.parse(readFileSync(join(__dirname, '../package.json'), 'utf8'));
+const VERSION = packageJson.version;
 
 // Input validation schemas - simple and focused
 const GetChapterSchema = z.object({
@@ -80,7 +89,7 @@ const CORE_PRINCIPLES = [
 const server = new Server(
   {
     name: 'the-way-of-code',
-    version: '1.1.2',
+    version: VERSION,
   },
   {
     capabilities: {
